@@ -147,7 +147,7 @@ const StudentsList = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`/apps/siswa/edit/${id}`)
+    navigate(`/dashboard/admin/siswa/edit/${id}`)
   }
 
   const ColorAlerts = ({ message }) => {

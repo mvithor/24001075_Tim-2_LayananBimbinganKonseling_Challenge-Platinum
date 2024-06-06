@@ -62,7 +62,7 @@ const StudentEdit = () => {
       await axios.put(`http://localhost:4000/students/${id}`, student);
       setSuccess('Data Siswa Berhasil di Perbarui');
       setTimeout(() => {
-        navigate('/apps/siswa')
+        navigate('/dashboard/admin/siswa')
       }, 3000);
     } catch (error) {
       if (error.response && error.response.data && error.response.data.msg) {

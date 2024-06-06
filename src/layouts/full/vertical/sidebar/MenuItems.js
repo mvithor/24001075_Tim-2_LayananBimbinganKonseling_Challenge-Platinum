@@ -77,31 +77,31 @@ const Menuitems = [
     id: uniqueId(),
     title: 'Master Data',
     icon: IconChartDonut3,
-    href: '/apps/blog/',
+    href: '#',
     children: [
       {
         id: uniqueId(),
         title: 'Data Siswa',
         icon: IconUser,
-        href: '/apps/siswa',
+        href: '/dashboard/admin/siswa',
       },
       {
         id: uniqueId(),
         title: 'Data Kelas',
         icon: IconHome,
-        href: '/apps/#',
+        href: '/dashboard/admin/kelas',
       },
       {
         id: uniqueId(),
         title: 'Data Prestasi',
         icon: IconTrophy,
-        href: '/#'
+        href: '/dashboard/admin/prestasi'
       },
       {
         id: uniqueId(),
         title: 'Data Pelanggaran',
         icon: IconStar,
-        href: '#'
+        href: '/dashboard/admin/pelanggaran'
 
       }
     ],
@@ -110,7 +110,7 @@ const Menuitems = [
     id: uniqueId(),
     title: 'Data Konselor',
     icon: IconUsers,
-    href: '/apps/konselor',
+    href: '/dashboard/admin/konselor',
   },
   // {
   //   id: uniqueId(),
