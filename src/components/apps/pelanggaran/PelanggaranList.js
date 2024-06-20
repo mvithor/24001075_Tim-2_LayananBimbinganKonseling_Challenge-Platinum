@@ -15,17 +15,15 @@ import {
   IconButton,
   Paper,
   TableContainer,
-  TextField,
+  TextField, 
   Alert
 } from '@mui/material';
-
 import { useNavigate } from 'react-router';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
 import { IconPencil, IconTrash } from '@tabler/icons';
+import FirstPageIcon from '@mui/icons-material/FirstPage';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
-
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
 import PageContainer from 'src/components/container/PageContainer';
 import ParentCard from 'src/components/shared/ParentCard';
@@ -49,6 +47,7 @@ function TablePaginationActions(props) {
   const handleLastPageButtonClick = (event) => {
     onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
+  
 
   return (
     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
@@ -93,24 +92,24 @@ const BCrumb = [
     title: 'Dashboard',
   },
   {
-    title: 'Data Konselor',
+    title: 'Data Pelanggaran',
   },
 ];
 
-const KonselorList = () => {
+const PelanggaranList = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [konselor, setKonselor] = useState([]);
+  const [pelanggaran, setPelanggaran] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const fetchKonselor = async () => {
+    const fetchPelanggaran = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/konselor');
-          setKonselor(response.data);
-        
+        const response = await axios.get('http://localhost:4000/pelanggaran');
+        const { pelanggaran } = response.data;
+        setPelanggaran(pelanggaran);
       } catch (error) {
         if (error.response && error.response.data && error.response.data.msg) {
           console.log(error.response.data);
@@ -121,20 +120,20 @@ const KonselorList = () => {
         }
       }
     };
-    fetchKonselor();
+    fetchPelanggaran();
   }, []);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
-  const filteredKonselor = Array.isArray(konselor)
-    ? konselor.filter((konselor) =>
-        konselor.nama.toLowerCase().includes(searchQuery.toLowerCase())
-      ).sort((a, b) => a.nama.localeCompare(b.nama))
-    : [];
+  const filteredPelanggaran = pelanggaran && pelanggaran.length > 0
+  ? pelanggaran.filter((data) =>
+      data.student_name.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+  : [];
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filteredKonselor.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - filteredPelanggaran.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -146,8 +145,8 @@ const KonselorList = () => {
   };
 
   const handleEdit = (id) => {
-    navigate(`/dashboard/admin/konselor/edit/${id}`);
-  };
+    navigate(`/dashboard/admin/pelanggaran/edit/${id}`)
+  }
 
   const ColorAlerts = ({ message }) => {
     return (
@@ -158,12 +157,12 @@ const KonselorList = () => {
   };
 
   return (
-    <PageContainer title="Data Konselor" description="Data Konselor">
-      <Breadcrumb title="Data Konselor" items={BCrumb} />
+    <PageContainer title="Data Pelanggaran" description="Data Pelanggaran">
+      <Breadcrumb title="Data Pelanggaran" items={BCrumb} />
       <Box justifyContent={'center'} mb={5}>
-        {error && <ColorAlerts message={error} />}
+      {error && <ColorAlerts message={error} />}
       </Box>
-      <ParentCard title="Data Konselor">
+      <ParentCard title="Data Pelanggaran">
         <Box
           sx={{
             display: 'flex',
@@ -198,16 +197,19 @@ const KonselorList = () => {
                     <Typography variant="h6" sx={{ fontSize: '1rem' }}>Nama</Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>Email</Typography>
+                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>Kelas</Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>Bidang</Typography>
+                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>Pelanggaran</Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>Telepon</Typography>
+                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>Poin</Typography>
                   </TableCell>
                   <TableCell>
-                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>Status</Typography>
+                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>Deskripsi</Typography>
+                  </TableCell>
+                  <TableCell>
+                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>Prosedur</Typography>
                   </TableCell>
                   <TableCell align="center">
                     <Typography variant="h6" sx={{ fontSize: '1rem' }}>Aksi</Typography>
@@ -216,44 +218,46 @@ const KonselorList = () => {
               </TableHead>
               <TableBody>
                 {(rowsPerPage > 0
-                  ? filteredKonselor.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  : filteredKonselor
-                ).map((konselor, index) => (
-                  <TableRow key={konselor.id}>
+                  ? filteredPelanggaran.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  : filteredPelanggaran
+                ).map((data, index) => (
+                  <TableRow key={index}>
                     <TableCell>
                       <Typography sx={{ fontSize: '1rem' }}>{page * rowsPerPage + index + 1}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography sx={{ fontSize: '1rem' }}>{konselor.nama}</Typography>
+                      <Typography sx={{ fontSize: '1rem' }}>{data.student_name}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography sx={{ fontSize: '1rem' }}>{konselor.email}</Typography>
+                      <Typography sx={{ fontSize: '1rem' }}>{data.kelas}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography sx={{ fontSize: '1rem' }}>{konselor.bidang}</Typography>
+                      <Typography sx={{ fontSize: '1rem' }}>{data.pelanggaran}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography sx={{ fontSize: '1rem' }}>{konselor.nomor_telepon}</Typography>
+                      <Typography sx={{ fontSize: '1rem' }}>{data.poin}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Typography sx={{ fontSize: '1rem' }}>{konselor.status_aktif ? 'Aktif' : 'Tidak Aktif'}</Typography>
+                      <Typography sx={{ fontSize: '1rem' }}>{data.deskripsi}</Typography>
                     </TableCell>
                     <TableCell>
-                      <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                      <Typography sx={{ fontSize: '1rem' }}>{data.prosedur_konseling}</Typography>
+                    </TableCell>
+                    <TableCell>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                         <IconButton>
-                          <IconTrash width={18} />
+                            <IconTrash width={18} />
                         </IconButton>
-                        <IconButton onClick={() => handleEdit(konselor.id)}>
-                          <IconPencil width={18} />
+                        <IconButton onClick={() => handleEdit(data.id)}>
+                            <IconPencil width={18} />
                         </IconButton>
-                      </Box>
+                    </Box>
                     </TableCell>
                   </TableRow>
                 ))}
-
                 {emptyRows > 0 && (
                   <TableRow style={{ height: 53 * emptyRows }}>
-                    <TableCell colSpan={7} />
+                    <TableCell colSpan={8} />
                   </TableRow>
                 )}
               </TableBody>
@@ -261,8 +265,8 @@ const KonselorList = () => {
                 <TableRow>
                   <TablePagination
                     rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
-                    colSpan={7}
-                    count={filteredKonselor.length}
+                    colSpan={8}
+                    count={filteredPelanggaran.length}
                     rowsPerPage={rowsPerPage}
                     page={page}
                     SelectProps={{
@@ -285,4 +289,4 @@ const KonselorList = () => {
   );
 };
 
-export default KonselorList;
+export default PelanggaranList;

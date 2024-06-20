@@ -21,7 +21,10 @@ const UserProfile = Loadable(lazy(() => import('../views/apps/user-profile/UserP
 const Gallery = Loadable(lazy(() => import('../views/apps/user-profile/Gallery')));
 const Student = Loadable(lazy(() => import('../views/apps/siswa/Siswa')));
 const StudentEdit = Loadable(lazy(() => import('../views/apps/siswa/SiswaEdit')))
-const Konselor = Loadable(lazy(() => import ('../views/apps/konselor/Konselor')));
+const KonselorList = Loadable(lazy(() => import ('../views/apps/konselor/Konselor')));
+const KonselorEdit = Loadable(lazy(() => import ('../views/apps/konselor/KonselorEdit')));
+const PelanggaranList = Loadable(lazy(() => import ('../views/apps/pelanggaran/PelanggaranList')))
+
 
 // Pages
 const AccountSetting = Loadable(lazy(() => import('../views/pages/account-setting/AccountSetting')),);
@@ -64,7 +67,9 @@ const Router = [
       { path: '/dashboard', exact: true, element: <ModernDash /> },
       { path: '/dashboard/admin/siswa', element: <Student/>},
       { path: '/dashboard/admin/siswa/edit/:id', element: <StudentEdit/> },
-      { path: '/dashboard/admin/konselor', element: <Konselor/>},
+      { path: '/dashboard/admin/konselor', element: <KonselorList/>},
+      { path: '/dashboard/admin/konselor/edit/:id', element: <KonselorEdit/>},
+      { path: '/dashboard/admin/pelanggaran', element: <PelanggaranList/>},
       { path: '/dashboard/admin/chats', element: <Chats /> },
       { path: '/dashboard/admin/notes', element: <Notes /> },
       { path: '/dashboard/admin/calendar', element: <Calendar /> },
