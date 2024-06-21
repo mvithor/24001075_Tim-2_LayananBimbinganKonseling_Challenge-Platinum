@@ -5,6 +5,9 @@ const baselightTheme = {
       main: '#F48C06',
       light: '#ECF2FF',
       dark: '#4570EA',
+      about: '#FFAB00',
+      about1: '#5B72EE',
+      about2: '#29B9E7',
     },
     secondary: {
       main: '#2F327D',
