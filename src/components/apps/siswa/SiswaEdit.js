@@ -30,9 +30,12 @@ const StudentEdit = () => {
       const response = await axios.get(`http://localhost:4000/students/${id}`);
       setStudents(response.data);
     } catch (error) {
-      if (error.response) {
-        console.log(error.response.data)
+      if (error.response && error.response.data && error.response.data.msg) {
+        console.log(error.response.data);
         setError(error.response.data.msg);
+      } else {
+        console.error('Terjadi kesalahan pada server:', error.message);
+        setError('Terjadi kesalahan pada server');
       }
     }
   };
@@ -77,6 +80,11 @@ const StudentEdit = () => {
       }
     }
   };
+
+  const handleCancel = () => {
+    navigate(-1); 
+  };
+
   const ColorAlerts = ({ message }) => {
     return (
       <Alert severity="error">
@@ -218,9 +226,23 @@ const StudentEdit = () => {
         </Grid>
         <Grid item xs={12} sm={3}></Grid>
         <Grid item xs={12} sm={9}>
-          <Button variant="contained" color="primary" type="submit">
-            Send
+          <Box sx={{ display: 'flex', justifyContent: 'left', alignItems: 'center', height: '100%' }}>
+          <Button sx={{ 
+            mr: 2, 
+            backgroundColor: "#F48C06",
+            '&:hover': {backgroundColor: "#f7a944",}
+          }} variant="contained"  type="submit">
+            Edit
           </Button>
+          <Button sx={{ 
+            backgroundColor:"#2F327D", 
+            '&:hover': {backgroundColor: "#63659e"}}} 
+            variant="contained" 
+            color='secondary'
+            type="button" onClick={handleCancel}>
+            Cancel
+          </Button>
+          </Box>
         </Grid>
       </Grid>
     </form>

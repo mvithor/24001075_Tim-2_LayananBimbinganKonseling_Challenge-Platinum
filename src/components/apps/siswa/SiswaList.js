@@ -89,7 +89,7 @@ TablePaginationActions.propTypes = {
 const BCrumb = [
   {
     to: '/dashboard',
-    title: 'dashboard',
+    title: 'Dashboard',
   },
   {
     title: 'Data Siswa',
@@ -114,16 +114,13 @@ const StudentsList = () => {
           console.log(error.response.data);
           setError(error.response.data.msg);
         } else {
-          console.error('Terjadi kesalahan pada server:', error.message);
-          setError('Terjadi kesalahan pada server');
-          setTimeout(() => {
-            navigate('/auth/404') // Ganti pake 500 internal server error
-          }, 3000);
+          console.error('Terjadi kesalahan:', error.message);
+          setError('Terjadi kesalahan saat memuat data');
         }
       }
     };
     fetchStudents();
-  }, [navigate]);
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -157,8 +154,6 @@ const StudentsList = () => {
       </Alert>
     );
   };
-
-
 
   return (
     <PageContainer title="Data Siswa" description="Data Siswa">
@@ -195,7 +190,7 @@ const StudentsList = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>No.</Typography>
+                    <Typography variant="h6" sx={{ fontSize: '1rem' }}>No</Typography>
                   </TableCell>
                   <TableCell>
                     <Typography variant="h6" sx={{ fontSize: '1rem' }}>Nama</Typography>
@@ -241,7 +236,6 @@ const StudentsList = () => {
                     <TableCell>
                       <Typography sx={{ fontSize: '1rem' }}>{student.alamat}</Typography>
                     </TableCell>
-
                     <TableCell>
                     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                         <IconButton>

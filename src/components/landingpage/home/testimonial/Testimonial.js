@@ -15,46 +15,46 @@ import './testimonial.css';
 
 const SliderData = [
   {
-    title: 'Jenny Wilson',
-    subtitle: 'Features avaibility',
+    title: 'Budi Santoso',
+    subtitle: 'Membantu saya Mengatasi Stres Belajar',
     avatar: img1,
     subtext:
-      'The dashboard template from adminmart has helped me provide a clean and sleek look to my dashboard and made it look exactly the way I wanted it to, mainly without having.',
+      'Saya sangat bersyukur menemukan website konseling sekolah ini. Mereka tidak hanya membantu saya mengatasi stres belajar, tetapi juga memberikan tips dan strategi yang berguna. Terima kasih atas segala bantuannya',
   },
   {
-    title: 'Minshan Cui',
-    subtitle: 'Features avaibility',
+    title: 'Dinda Fitriani',
+    subtitle: 'Dukungan yang Luar Biasa',
     avatar: img2,
     subtext:
-      'The quality of design is excellent, customizability and flexibility much better than the other products available in the market.I strongly recommend the AdminMart to other.',
+      'Saya ingin mengucapkan terima kasih kepada tim di website konseling sekolah online ini atas dukungan mereka yang luar biasa. Mereka tidak hanya mendengarkan masalah saya, tetapi juga memberikan solusi yang praktis dan membantu saya mengatasi rasa khawatir saya di sekolah.',
   },
   {
-    title: 'Eminson Mendoza',
-    subtitle: 'Features avaibility',
+    title: 'Rizki Pratama',
+    subtitle: 'Solusi untuk Masalah Sekolah',
     avatar: img3,
     subtext:
-      'This template is great, UI-rich and up-to-date. Although it is pretty much complete, I suggest to improve a bit of documentation. Thanks & Highly recomended!',
+      'Saya menemukan solusi untuk masalah sekolah saya di website konseling sekolah online ini. Tim konselor sangat responsif dan memberikan dukungan yang dibutuhkan. Saya merasa lebih percaya diri setelah mendapatkan bantuan dari mereka.',
   },
   {
-    title: 'Jenny Wilson',
-    subtitle: 'Features avaibility',
+    title: 'Ahmad Faisal',
+    subtitle: 'Bantuan yang Profesional',
     avatar: img1,
     subtext:
-      'The dashboard template from adminmart has helped me provide a clean and sleek look to my dashboard and made it look exactly the way I wanted it to, mainly without having.',
+      'Website konseling sekolah online ini menyediakan bantuan yang sangat profesional. Saya merasa nyaman berbagi masalah saya dan mendapatkan saran yang sangat berharga. Terima kasih kepada tim di balik layanan ini!.',
   },
   {
-    title: 'Minshan Cui',
-    subtitle: 'Features avaibility',
+    title: 'Siti Nurjanah',
+    subtitle: 'Mudah digunakan dan Bermanfaat',
     avatar: img2,
     subtext:
-      'The quality of design is excellent, customizability and flexibility much better than the other products available in the market.I strongly recommend the AdminMart to other.',
+      'Saya sangat senang menggunakan website konseling sekolah online ini. Antarmuka yang mudah digunakan membuat saya merasa nyaman dan tenang untuk berbagi masalah. Selain itu, saran yang saya terima juga sangat bermanfaat bagi saya.',
   },
   {
-    title: 'Eminson Mendoza',
-    subtitle: 'Features avaibility',
+    title: 'Naufal Al Hannan',
+    subtitle: 'Pelayanan Konseling yang Ramah',
     avatar: img3,
     subtext:
-      'This template is great, UI-rich and up-to-date. Although it is pretty much complete, I suggest to improve a bit of documentation. Thanks & Highly recomended!',
+      'Saya sangat terbantu dengan pelayanan konseling yang ramah dari tim di website konseling sekolah online ini. Mereka sangat peduli dan membantu saya menemukan solusi untuk masalah yang saya hadapi di sekolah. Terima kasih banyak!',
   },
 ];
 
@@ -105,10 +105,10 @@ const Testimonial = () => {
           <AnimationFadeIn>
             <Slider {...settings}>
               {SliderData.map((slider, index) => (
-                <Box p="15px" key={index}>
+                <Box key={index} sx={{ p: '15px', width: 'auto' }}>
                   <BlankCard>
                     <CardContent>
-                      <Stack direction="row">
+                      <Stack direction="row" alignItems="center">
                         <Avatar src={slider.avatar} alt="user" sx={{ width: 40, height: 40 }} />
                         <Box ml={2}>
                           <Typography variant="h6">{slider.title}</Typography>

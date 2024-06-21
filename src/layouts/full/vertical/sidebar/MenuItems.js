@@ -1,7 +1,7 @@
 import {
   // IconAward,
   // IconBoxMultiple,
-  // IconPoint,
+  IconPoint,
   // IconAlertCircle,
   // IconNotes,
   // IconCalendar,
@@ -112,33 +112,120 @@ const Menuitems = [
     icon: IconUsers,
     href: '/dashboard/admin/konselor',
   },
-  // {
-  //   id: uniqueId(),
-  //   title: 'Data Kelas',
-  //   icon: IconPackage,
-  //   href: '/apps/contacts',
-  // },
 
-  // {
-  //   id: uniqueId(),
-  //   title: 'Master Data',
-  //   icon: IconChartDonut3,
-  //   href: '/apps/blog/',
-  //   children: [
-  //     {
-  //       id: uniqueId(),
-  //       title: 'Posts',
-  //       icon: IconPoint,
-  //       href: '/apps/blog/posts',
-  //     },
-  //     {
-  //       id: uniqueId(),
-  //       title: 'Detail',
-  //       icon: IconPoint,
-  //       href: '/apps/blog/detail/streaming-video-way-before-it-was-cool-go-dark-tomorrow',
-  //     },
-  //   ],
-  // },
+  {
+    id: uniqueId(),
+    title: 'Layanan',
+    icon: IconChartDonut3,
+    href: '#',
+    children: [
+      {
+        id: uniqueId(),
+        title: 'Konseling Individu',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Konseling Kelompok',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Mediasi',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Konsultasi',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Catatan Anekdot',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Konferensi Kasus',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Home Visit',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Referal',
+        icon: IconPoint,
+        href: '#',
+      },
+    ],
+  },
+  {
+    id: uniqueId(),
+    title: 'Rekap Layanan',
+    icon: IconChartDonut3,
+    href: '#',
+    children: [
+      {
+        id: uniqueId(),
+        title: 'Konseling Individu',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Konseling Kelompok',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Mediasi',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Konsultasi',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Catatan Anekdot',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Konferensi Kasus',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Home Visit',
+        icon: IconPoint,
+        href: '#',
+      },
+      {
+        id: uniqueId(),
+        title: 'Referal',
+        icon: IconPoint,
+        href: '#',
+      },
+
+    ],
+  },
   // {
   //   id: uniqueId(),
   //   title: 'Ecommerce',

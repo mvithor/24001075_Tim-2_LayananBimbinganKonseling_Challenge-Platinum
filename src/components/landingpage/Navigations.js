@@ -67,7 +67,7 @@ const Navigations = () => {
         sx={{
           backgroundColor: "#F48C06",
           '&:hover': {
-            backgroundColor: "#fa9e28",
+            backgroundColor: "#f7a944",
           }
         }}
       >
