@@ -35,6 +35,7 @@ const Register = Loadable(lazy(() => import('../views/authentication/auth1/Regis
 const ForgotPassword = Loadable(lazy(() => import('../views/authentication/auth1/ForgotPassword')));
 const TwoSteps = Loadable(lazy(() => import('../views/authentication/auth1/TwoSteps')));
 const Error = Loadable(lazy(() => import('../views/authentication/Error')));
+const InternalError = Loadable(lazy(() => import('../views/authentication/505Error')));
 const Maintenance = Loadable(lazy(() => import('../views/authentication/Maintenance')));
 
 // landingpage
@@ -58,6 +59,7 @@ const Router = [
       { path: '/auth/forgot-password', element: <ForgotPassword /> },
       { path: '/auth/two-steps', element: <TwoSteps /> },
       { path: '/auth/maintenance', element: <Maintenance /> },
+      { path: '/auth/InternalError', element: <InternalError /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },
