@@ -59,11 +59,11 @@ const ContentTentang = () => {
                     
                     p={3.2}
                 sx={{
-                    // border:'1px solid',
+                    border:'1px solid',
                   backgroundColor: ('#ffffff'),
                   position: 'relative',
                   height: 'calc(100vh - 100px)',
-                  maxHeight: '790px',
+                //   maxHeight: '790px',
                   overflow: 'hidden',
                 }}
                     >
@@ -71,7 +71,7 @@ const ContentTentang = () => {
                     <BackgroundBox />
                     <AnimateFadeIn>
                             <img src={studentImage1} alt="banner" style={{ 
-                     position: 'absolute',
+                     position: 'relative',
                      top: 0, 
                      left: 0, 
                       width: '100%', 
@@ -91,7 +91,7 @@ const ContentTentang = () => {
                         
                         <AnimateFadeIn>
                       <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} justifyContent="space-around"
-                      sx={{mt:4}}
+                      sx={{mt:10}}
                       >
                         
                             <DemoPaper1 variant="elevation" sx={{ minWidth: 275, bgcolor: 'primary.about1', textAlign: 'justify', zIndex: 2 }}>
@@ -145,7 +145,7 @@ const ContentTentang = () => {
                 </Grid>
             </Grid>
             {/* content 2 */}
-            <Grid container spacing={4} alignItems="center" textAlign={'justify'} >
+            <Grid container spacing={4} alignItems="center" textAlign={'justify'} sx={{mt:8}}>
             <Grid item xs={12} md={12} >
                         <AnimateFadeIn>
                             <Typography
