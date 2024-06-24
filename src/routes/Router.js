@@ -52,7 +52,7 @@ const LandingPage = Loadable(lazy(() => import('../views/pages/landingpage/Landi
 const TentangKami = Loadable(lazy(() => import('../views/pages/landingpage/TentangKami')));
 const Layanan = Loadable(lazy(() => import('../views/pages/landingpage/LayananKami')));
 // const Konselor = Loadable(lazy(() => import('')));
-// const Literasi = Loadable(lazy(() => import('')));
+const Literasi = Loadable(lazy(() => import('../views/pages/landingpage/Literasi')));
 
 const Router = [
   {
@@ -62,6 +62,7 @@ const Router = [
       { path: '/', element: <LandingPage /> },
       { path: '/layanan', element: <Layanan /> },
       { path: '/tentang-kami', element: <TentangKami /> },
+      { path: '/literasi', element: <Literasi /> },
       { path: '/auth/404', element: <Error /> },
       { path: '/auth/login', element: <Login /> },
       { path: '/auth/register', element: <Register /> },
