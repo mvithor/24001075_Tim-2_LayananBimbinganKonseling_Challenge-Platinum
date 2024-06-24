@@ -59,7 +59,7 @@ const Router = [
       { path: '/auth/forgot-password', element: <ForgotPassword /> },
       { path: '/auth/two-steps', element: <TwoSteps /> },
       { path: '/auth/maintenance', element: <Maintenance /> },
-      { path: '/auth/InternalError', element: <InternalError /> },
+      { path: '/auth/505', element: <InternalError /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
   },
