@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Box, Container, styled, Button} from '@mui/material';
+import { Grid, Typography, Box, Container, styled, Button, useMediaQuery} from '@mui/material';
 import AnimateFadeIn from '../animation/Animation';
 
 
@@ -95,7 +95,9 @@ const StyledBackground3 = styled(Box)(({ theme }) => ({
 }));
 
 const ContentLayanan = () => {
+  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('md'));
   return (
+    
     <StyledContainer maxWidth="lg">
 
       {/* content 1*/}
@@ -104,7 +106,7 @@ const ContentLayanan = () => {
           <Box>
             <AnimateFadeIn>
               <Typography
-                variant="h2"
+                variant={lgUp? "h2" : "h3"}
                 fontWeight={700}
                 gutterBottom
                 sx={{ color: '#2F327D' }}
@@ -133,6 +135,7 @@ const ContentLayanan = () => {
             </AnimateFadeIn>
           </Box>
         </Grid>
+        { lgUp? (
         <Grid item xs={12} md={6}>
           <AnimateFadeIn>
             <StyledBackground>
@@ -146,9 +149,11 @@ const ContentLayanan = () => {
             </StyledBackground>
           </AnimateFadeIn>
         </Grid>
+        ): null}
       </Grid>
       {/* content 2 */}
       <Grid container spacing={4} alignItems="center" textAlign={'justify'}>
+      { lgUp? (
         <Grid item xs={12} md={6}>
           <AnimateFadeIn>
             <StyledBackground1>
@@ -162,11 +167,12 @@ const ContentLayanan = () => {
             </StyledBackground1>
           </AnimateFadeIn>
         </Grid>
+      ) : null}
         <Grid item xs={12} md={6}>
           <Box>
             <AnimateFadeIn>
               <Typography
-                variant="h2"
+                variant={lgUp? "h2" : "h3"}
                 fontWeight={700}
                 gutterBottom
                 sx={{ color: '#2F327D' }}
@@ -202,7 +208,7 @@ const ContentLayanan = () => {
           <Box>
             <AnimateFadeIn>
               <Typography
-                variant="h2"
+                variant={lgUp? "h2" : "h3"}
                 fontWeight={700}
                 gutterBottom
                 sx={{ color: '#2F327D' }}
@@ -229,6 +235,7 @@ const ContentLayanan = () => {
             </AnimateFadeIn>
           </Box>
         </Grid>
+        { lgUp? (
         <Grid item xs={12} md={6}>
           <AnimateFadeIn>
             <StyledBackground2>
@@ -242,9 +249,11 @@ const ContentLayanan = () => {
             </StyledBackground2>
           </AnimateFadeIn>
         </Grid>
+        ) : null}
       </Grid>
       {/* content 4 */}
       <Grid container spacing={4} alignItems="center" textAlign={'justify'}>
+      { lgUp? (
         <Grid item xs={12} md={6}>
           <AnimateFadeIn>
             <StyledBackground3>
@@ -258,11 +267,12 @@ const ContentLayanan = () => {
             </StyledBackground3>
           </AnimateFadeIn>
         </Grid>
+      ) : null }
         <Grid item xs={12} md={6}>
           <Box>
             <AnimateFadeIn>
               <Typography
-                variant="h2"
+                variant={lgUp? "h2" : "h3"}
                 fontWeight={700}
                 gutterBottom
                 sx={{ color: '#2F327D' }}
