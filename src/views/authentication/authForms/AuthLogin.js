@@ -1,26 +1,14 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  Typography,
-  FormGroup,
-  FormControlLabel,
-  Button,
-  Stack,
-  Divider,
-  InputAdornment,
-  IconButton,
-  Alert
-} from '@mui/material';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
+import { Box, Typography, FormGroup, FormControlLabel, Button, Stack, Divider, InputAdornment, IconButton, Alert } from '@mui/material';
+import { useDispatch } from 'react-redux';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import CustomCheckbox from '../../../components/forms/theme-elements/CustomCheckbox';
 import CustomTextField from '../../../components/forms/theme-elements/CustomTextField';
 import CustomFormLabel from '../../../components/forms/theme-elements/CustomFormLabel';
-
 import AuthSocialButtons from './AuthSocialButtons';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import axiosInstance from 'src/utils/axiosInstance';
+import { setUser } from 'src/store/apps/user/userSlice';
 
 const AuthLogin = ({ title, subtitle, subtext }) => {
   const [email, setEmail] = useState('');
@@ -28,30 +16,45 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const location = useLocation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.get('expired')) {
+      setError('Session expired. Please login again.');
+    }
+  }, [location.search]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
     try {
-      const response = await axios.post('http://localhost:4000/auth/login', {
+      const response = await axiosInstance.post('/auth/login', {
         email,
         password
       });
-      console.log(response.data);
-      if (response.data.accessToken) {
-        // Redirect ke halaman dashboard jika login berhasil
-        navigate('/dashboard');
+
+      const { name, role, accessToken } = response.data;
+      localStorage.setItem('accessToken', accessToken);
+      dispatch(setUser({ name, role, accessToken }));
+
+      if (role === 'admin') {
+        navigate('/dashboard/admin');
+      } else if (role === 'siswa') {
+        navigate('/dashboard/siswa');
       } else {
-        setError('Gagal melakukan login. Coba lagi.');
+        setError('Unknown user role.');
       }
     } catch (error) {
-      // Tangani kesalahan respons dari backend
       if (error.response) {
-        console.log(error.response.data);
         setError(error.response.data.msg);
+      } else {
+        setError('Something went wrong. Please try again later.');
       }
     }
-  }
+  };
+  
 
   return (
     <>
@@ -67,14 +70,7 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
       <AuthSocialButtons title="Sign in with" />
       <Box mt={3}>
         <Divider>
-          <Typography
-            component="span"
-            color="textPrimary"
-            variant="h6"
-            fontWeight="400"
-            position="relative"
-            px={2}
-          >
+          <Typography component="span" color="textPrimary" variant="h6" fontWeight="400" position="relative" px={2}>
             or sign in with
           </Typography>
         </Divider>
@@ -110,31 +106,39 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
             value={password}
             type={showPassword ? 'text' : 'password'}
             onChange={(e) => setPassword(e.target.value)}
+            required
+            autoComplete="current-password"
+            sx={{
+              '& .MuiInputBase-input::placeholder': {
+                color: 'gray',
+              },
+            }}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
                   <IconButton
+                    aria-label="toggle password visibility"
                     onClick={() => setShowPassword(!showPassword)}
                     onMouseDown={(e) => e.preventDefault()}
+                    edge="end"
                   >
                     {showPassword ? <Visibility /> : <VisibilityOff />}
                   </IconButton>
                 </InputAdornment>
               ),
             }}
-            required
-            sx={{
-              '& .MuiInputBase-input::placeholder': {
-                color: 'gray',
-              },
-            }}
           />
 
-          <Stack justifyContent="space-between" direction="row" alignItems="center" my={2}>
+          <Stack
+            justifyContent="space-between"
+            direction="row"
+            alignItems="center"
+            my={2}
+          >
             <FormGroup>
               <FormControlLabel
                 control={<CustomCheckbox defaultChecked />}
-                label="Remember this Device"
+                label="Remeber this Device"
               />
             </FormGroup>
             <Typography
@@ -160,11 +164,14 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
           </Button>
         </Box>
       </Stack>
+      
 
       {subtitle}
+      
     </>
+    
   );
-}
+};
 
 const ColorAlerts = ({ message }) => {
   return (

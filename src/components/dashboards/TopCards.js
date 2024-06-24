@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import { Box, CardContent, Grid, Typography } from '@mui/material';
 
 import icon1 from '../../assets/images/svgs/icon-connect.svg';
@@ -9,53 +10,74 @@ import icon4 from '../../assets/images/svgs/icon-mailbox.svg';
 import icon5 from '../../assets/images/svgs/icon-favorites.svg';
 import icon6 from '../../assets/images/svgs/icon-speech-bubble.svg';
 
-
-const topcards = [
-  {
-    href: '/user-profile',
-    icon: icon2,
-    title: 'Profile',
-    digits: '3,685',
-    bgcolor: 'primary',
-  },
-  {
-    href: '/apps/blog/posts',
-    icon: icon3,
-    title: 'Blog',
-    digits: '256',
-    bgcolor: 'warning',
-  },
-  {
-    href: '/apps/calendar',
-    icon: icon4,
-    title: 'Calendar',
-    digits: '932',
-    bgcolor: 'secondary',
-  },
-  {
-    href: '/apps/email',
-    icon: icon5,
-    title: 'Email',
-    digits: '$348K',
-    bgcolor: 'error',
-  },
-  {
-    href: '/apps/chats',
-    icon: icon6,
-    title: 'Chats',
-    digits: '96',
-    bgcolor: 'success',
-  },
-  {
-    href: '/apps/contacts',
-    icon: icon1,
-    title: 'Contacts',
-    digits: '48',
-    bgcolor: 'info',
-  },
-];
-
 const TopCards = () => {
+  const [studentCount, setStudentCount] = useState(0);
+  const [konselorCount, setKonselorCount] = useState(0);
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      try {
+        const [studentResponse, konselorResponse] = await Promise.all([
+          axios.get('http://localhost:4000/students/count'),
+          axios.get('http://localhost:4000/konselor/count')
+        ]);
+
+        setStudentCount(studentResponse.data.count);
+        setKonselorCount(konselorResponse.data.count);
+      } catch (error) {
+        console.error('Error fetching counts', error);
+      }
+    };
+
+    fetchCounts();
+  }, []);
+
+
+  const topcards = [
+    {
+      href: '/dashboard/admin/siswa',
+      icon: icon2,
+      title: 'Siswa',
+      digits: studentCount,
+      bgcolor: 'primary',
+    },
+    {
+      href: '/dashboard/admin/konselor',
+      icon: icon3,
+      title: 'Konselor',
+      digits: konselorCount,
+      bgcolor: 'warning',
+    },
+    {
+      href: '/dashboard/admin/kelas',
+      icon: icon4,
+      title: 'Kelas',
+      digits: '30',
+      bgcolor: 'secondary',
+    },
+    {
+      href: '/dashboard/admin/konsultasi',
+      icon: icon5,
+      title: 'Konsultasi',
+      digits: '48',
+      bgcolor: 'info',
+    },
+    {
+      href: '/dashboard/admin/prestasi',
+      icon: icon6,
+      title: 'Prestasi',
+      digits: '48',
+      bgcolor: 'info',
+    },
+    {
+      href: '/dashboard/admin/pelanggaran',
+      icon: icon1,
+      title: 'Pelanggaran',
+      digits: '48',
+      bgcolor: 'info',
+    },
+  ];
+
   return (
     <Grid container spacing={3} mt={3}>
       {topcards.map((topcard, i) => (

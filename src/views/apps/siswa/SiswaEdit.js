@@ -1,35 +1,103 @@
-import React from 'react';
-import StudentEdit from 'src/components/apps/siswa/SiswaEdit';
-import { Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Box, Alert } from '@mui/material';
+import axios from 'axios';
 import PageContainer from 'src/components/container/PageContainer';
-import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
+import ParentCard from 'src/components/shared/ParentCard';
+import BreadcrumbSiswaEdit from 'src/components/apps/siswa/siswaEdit/BreadcrumbSiswaEdit';
+import StudentEditForm from 'src/components/apps/siswa/siswaEdit/StudentEdit';
 
+const StudentEdit = () => {
+  const { id } = useParams();
+  const [student, setStudent] = useState({
+    name: '',
+    jenis_kelamin_id: '',
+    tanggal_lahir: null,
+    kelas_id: '',
+    alamat: '',
+  });
 
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
-const BCrumb = [
-  {
-    to: '/dashboard',
-    title: 'Dashboard'
-  },
-  {
-    title: 'Form Edit Siswa'
-  }
-];
+  const fetchStudentById = async (id) => {
+    try {
+      const response = await axios.get(`http://localhost:4000/students/${id}`);
+      setStudent(response.data);
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.msg) {
+        console.log(error.response.data);
+        setError(error.response.data.msg);
+      } else {
+        console.error('Terjadi kesalahan pada server:', error.message);
+        setError('Terjadi kesalahan pada server');
+      }
+    }
+  };
 
-const Student = () => {
-  return (  
-    <PageContainer title='Form Edit Siswa' description='Halaman Edit Siswa'>
-      <Breadcrumb title="Form Edit Siswa" items={BCrumb}/>
-      <Grid container spacing={3}>
-        <Grid item lg={12} md={12} xs={12}>
-          <StudentEdit/>
-      </Grid>
-      </Grid>
+  useEffect(() => {
+    fetchStudentById(id);
+  }, [id]);
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setStudent((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleDateChange = (date) => {
+    setStudent((prevState) => ({
+      ...prevState,
+      tanggal_lahir: date,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`http://localhost:4000/students/${id}`, student);
+      setSuccess('Data Siswa Berhasil di Perbarui');
+      setTimeout(() => {
+        navigate('/dashboard/admin/siswa');
+      }, 3000);
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.msg) {
+        console.log(error.response.data);
+        setError(error.response.data.msg);
+      } else {
+        console.error('Terjadi kesalahan:', error.message);
+        setError('Terjadi kesalahan saat memuat data');
+      }
+    }
+  };
+
+  const handleCancel = () => {
+    navigate(-1); 
+  };
+
+  return (
+    <PageContainer>
+      <BreadcrumbSiswaEdit/>
+      <Box justifyContent={'center'} mb={3}>
+        {error && <Alert severity="error">{error}</Alert>}
+        {success && <Alert severity="success">{success}</Alert>}
+      </Box>
+      <ParentCard title="Form Edit Siswa">
+        <StudentEditForm
+          student={student}
+          handleChange={handleChange}
+          handleDateChange={handleDateChange}
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+          error={error}
+          success={success}
+        />
+      </ParentCard>
     </PageContainer>
-      
-    
   );
 };
 
-export default Student;
+export default StudentEdit;

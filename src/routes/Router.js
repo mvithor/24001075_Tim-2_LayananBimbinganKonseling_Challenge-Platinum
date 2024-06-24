@@ -1,6 +1,7 @@
 import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
+
 import Loadable from '../layouts/full/shared/loadable/Loadable';
 // import { element } from 'prop-types';
 // import { element } from 'prop-types';
@@ -9,8 +10,9 @@ import Loadable from '../layouts/full/shared/loadable/Loadable';
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
 const BlankLayout = Loadable(lazy(() => import('../layouts/blank/BlankLayout')));
 
-/* ****Pages***** */
-const ModernDash = Loadable(lazy(() => import('../views/dashboard/Admin')));
+/* ****Dashboards***** */
+const DashboardAdmin = Loadable(lazy(() => import('../views/dashboard/Admin')));
+const DashboardSiswa = Loadable(lazy(() => import('../views/dashboard/Siswa')))
 
 /* ****Dashboard Admin***** */
 const Chats = Loadable(lazy(() => import('../views/apps/chat/Chat')));
@@ -19,11 +21,17 @@ const Calendar = Loadable(lazy(() => import('../views/apps/calendar/BigCalendar'
 const Tickets = Loadable(lazy(() => import('../views/apps/tickets/Tickets')));
 const UserProfile = Loadable(lazy(() => import('../views/apps/user-profile/UserProfile')));
 const Gallery = Loadable(lazy(() => import('../views/apps/user-profile/Gallery')));
-const Student = Loadable(lazy(() => import('../views/apps/siswa/Siswa')));
+const StudentList = Loadable(lazy(() => import('../views/apps/siswa/SiswaList')));
 const StudentEdit = Loadable(lazy(() => import('../views/apps/siswa/SiswaEdit')))
 const KonselorList = Loadable(lazy(() => import ('../views/apps/konselor/Konselor')));
 const KonselorEdit = Loadable(lazy(() => import ('../views/apps/konselor/KonselorEdit')));
-const PelanggaranList = Loadable(lazy(() => import ('../views/apps/pelanggaran/PelanggaranList')))
+const PelanggaranList = Loadable(lazy(() => import ('../views/apps/pelanggaran/PelanggaranList')));
+const KelasList = Loadable(lazy(() => import ('../views/apps/kelas/KelasList')));
+const KelasAdd = Loadable(lazy(() => import ('../views/apps/kelas/KelasAdd')));
+
+
+
+/* ****Dashboard Siswa***** */
 
 
 // Pages
@@ -70,12 +78,14 @@ const Router = [
     path: '/',
     element: <FullLayout />,
     children: [
-      { path: '/dashboard', exact: true, element: <ModernDash /> },
-      { path: '/dashboard/admin/siswa', element: <Student/>},
+      { path: '/dashboard/admin', exact: true, element: <DashboardAdmin />, role: 'admin' },
+      { path: '/dashboard/admin/siswa', element: <StudentList/>},
       { path: '/dashboard/admin/siswa/edit/:id', element: <StudentEdit/> },
       { path: '/dashboard/admin/konselor', element: <KonselorList/>},
       { path: '/dashboard/admin/konselor/edit/:id', element: <KonselorEdit/>},
       { path: '/dashboard/admin/pelanggaran', element: <PelanggaranList/>},
+      { path: '/dashboard/admin/kelas', element: <KelasList/>, role: 'admin'}, 
+      { path: '/dashboard/admin/kelas/tambah-kelas', element: <KelasAdd/>}, 
       { path: '/dashboard/admin/chats', element: <Chats /> },
       { path: '/dashboard/admin/notes', element: <Notes /> },
       { path: '/dashboard/admin/calendar', element: <Calendar /> },
@@ -84,6 +94,14 @@ const Router = [
       { path: '/user-profile', element: <UserProfile /> },
       { path: '/pages/account-settings', element: <AccountSetting /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
+    ],
+    
+  },
+  {
+    path: '/',
+    element: <FullLayout />, 
+    children: [
+      { path: '/dashboard/siswa', exact: true, element: <DashboardSiswa /> }, 
     ],
   },
 ];

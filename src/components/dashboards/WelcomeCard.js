@@ -1,9 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Box, Typography, Card, CardContent, Grid } from '@mui/material';
-
 import welcomeImg from 'src/assets/images/backgrounds/welcome-bg2.png';
 
 const WelcomeCard = () => {
+  const user = useSelector((state) => state.user); // Mengakses state pengguna dari Redux store
+
   return (
     <Card elevation={0} sx={{ backgroundColor: (theme) => theme.palette.primary.light, py: 0 }}>
       <CardContent sx={{ py: 2 }}>
@@ -17,7 +19,7 @@ const WelcomeCard = () => {
                 },
               }}
             >
-              <Typography variant="h5">Welcome back Mathew!</Typography>
+              <Typography variant="h4">Welcome back {user ? user.name : 'Guest'} !</Typography>
               <Typography variant="subtitle2" my={2} color="textPrimary">
                 Semoga Harimu Menyenangkan
               </Typography>
@@ -25,7 +27,7 @@ const WelcomeCard = () => {
           </Grid>
           <Grid item sm={5}>
             <Box mb="-90px">
-              <img src={welcomeImg} alt={welcomeImg} width={'300px'} />
+              <img src={welcomeImg} alt="Welcome" width={'300px'} />
             </Box>
           </Grid>
         </Grid>

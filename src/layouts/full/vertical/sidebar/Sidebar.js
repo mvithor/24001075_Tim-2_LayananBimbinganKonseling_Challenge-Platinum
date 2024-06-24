@@ -9,8 +9,11 @@ import { Profile } from './SidebarProfile/Profile';
 const Sidebar = () => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
   const customizer = useSelector((state) => state.customizer);
+  const user = useSelector((state) => state.user || {}); // Tambahkan nilai default {}
   const dispatch = useDispatch();
   const theme = useTheme();
+  const role = user.role || 'guest'; // Pastikan role ada, jika tidak set default ke 'guest'
+
   const toggleWidth =
     customizer.isCollapse && !customizer.isSidebarHover
       ? customizer.MiniSidebarWidth
@@ -37,9 +40,7 @@ const Sidebar = () => {
           }),
         }}
       >
-        {/* ------------------------------------------- */}
         {/* Sidebar for desktop */}
-        {/* ------------------------------------------- */}
         <Drawer
           anchor="left"
           open
@@ -56,9 +57,7 @@ const Sidebar = () => {
             },
           }}
         >
-          {/* ------------------------------------------- */}
           {/* Sidebar Box */}
-          {/* ------------------------------------------- */}
           <Box
             sx={{
               backgroundColor:
@@ -69,17 +68,13 @@ const Sidebar = () => {
               height: '100%',
             }}
           >
-            {/* ------------------------------------------- */}
             {/* Logo */}
-            {/* ------------------------------------------- */}
             <Box px={3}>
               <Logo />
             </Box>
             <Scrollbar sx={{ height: 'calc(100% - 190px)' }}>
-              {/* ------------------------------------------- */}
               {/* Sidebar Items */}
-              {/* ------------------------------------------- */}
-              <SidebarItems />
+              <SidebarItems role={role} /> {/* Pass role to SidebarItems */}
             </Scrollbar>
             <Profile />
           </Box>
@@ -107,16 +102,12 @@ const Sidebar = () => {
         },
       }}
     >
-      {/* ------------------------------------------- */}
       {/* Logo */}
-      {/* ------------------------------------------- */}
       <Box px={2}>
         <Logo />
       </Box>
-      {/* ------------------------------------------- */}
       {/* Sidebar For Mobile */}
-      {/* ------------------------------------------- */}
-      <SidebarItems />
+      <SidebarItems role={role} /> {/* Pass role to SidebarItems */}
     </Drawer>
   );
 };

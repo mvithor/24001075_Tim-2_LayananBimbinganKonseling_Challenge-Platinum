@@ -1,8 +1,13 @@
 import { Box, Container, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 import ErrorImg from 'src/assets/images/backgrounds/errorimg.svg';
 
-const Error = () => (
+const Error = () => {
+  const navigate = useNavigate()
+  const handleCancel = () => {
+    navigate(-1); 
+  };
+  return (
   <Box
     display="flex"
     flexDirection="column"
@@ -21,14 +26,17 @@ const Error = () => (
       <Button
         color="primary"
         variant="contained"
-        component={Link}
-        to="/dashboard"
-        disableElevation
+        type="button"
+        onClick={handleCancel}
+      
       >
         Go Back to Home
       </Button>
     </Container>
   </Box>
 );
+}
+
+
 
 export default Error;

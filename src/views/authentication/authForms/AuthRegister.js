@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Box, Typography, Button, Divider } from '@mui/material';
+import { Box, Typography, Button, Divider, Alert, IconButton, InputAdornment, MenuItem, Grid } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import { IconButton, InputAdornment, FormControl, InputLabel, Select, MenuItem, Alert } from '@mui/material';
 
 import CustomTextField from '../../../components/forms/theme-elements/CustomTextField';
 import CustomFormLabel from '../../../components/forms/theme-elements/CustomFormLabel';
 import { Stack } from '@mui/system';
 import AuthSocialButtons from './AuthSocialButtons';
+import CustomSelect from 'src/components/forms/theme-elements/CustomSelect'; // Pastikan import CustomSelect yang sesuai
 
 const AuthRegister = ({ title, subtitle, subtext }) => {
     const [name, setName] = useState('');
@@ -20,43 +20,55 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [confPassword, setConfPassword] = useState('');
     const [showConfPassword, setShowConfPassword] = useState(false);
-    const [jenis_kelamin, setJenisKelamin] = useState('');
+    const [jenis_kelamin_id, setJenisKelaminId] = useState(''); // Ubah nama state menjadi jenis_kelamin_id
     const [tanggal_lahir, setTanggalLahir] = useState(null);
-    const [kelas, setKelas] = useState('');
+    const [kelas_id, setKelasId] = useState(''); // Ubah nama state menjadi kelas_id
     const [alamat, setAlamat] = useState('');
     const [genderOptions, setGenderOptions] = useState([]);
+    const [kelasOptions, setKelasOptions] = useState([]);
     const [error, setError] = useState('');
-    const [succes, setSucces] = useState('');
+    const [success, setSuccess] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchGenderOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/students/jenis-kelamin');
+                const response = await axios.get('http://localhost:4000/users/jenis-kelamin');
                 setGenderOptions(response.data);
             } catch (error) {
                 console.error("Error fetching gender options:", error);
             }
         };
 
+        const fetchKelasOptions = async () => {
+            try {
+                const response = await axios.get('http://localhost:4000/kelas');
+                setKelasOptions(response.data);
+            } catch (error) {
+                console.error("Error fetching kelas:", error);
+            }
+        }
+
         fetchGenderOptions();
+        fetchKelasOptions();
     }, []);
+
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
-        setSucces('');
+        setSuccess('');
         try {
             await axios.post('http://localhost:4000/auth/register', {
-                name: name,
-                email: email,
-                password: password,
-                confPassword: confPassword,
-                jenis_kelamin: jenis_kelamin,
-                tanggal_lahir: tanggal_lahir,
-                kelas: kelas,
-                alamat: alamat
+                name,
+                email,
+                password,
+                confPassword,
+                jenis_kelamin_id, // Ubah menjadi jenis_kelamin_id
+                tanggal_lahir,
+                kelas_id, // Ubah menjadi kelas_id
+                alamat
             });
-            setSucces('Registrasi berhasil! Silakan login.');
+            setSuccess('Registrasi berhasil! Silakan login.');
             setTimeout(() => {
                 navigate('/auth/login');
             }, 2000); // Redirect after 2 seconds
@@ -67,34 +79,14 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
             }
         }
     }
-    // const handleRegister = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         await axios.post('http://localhost:4000/auth/register', {
-    //             name: name,
-    //             email: email,
-    //             password: password,
-    //             confPassword: confPassword,
-    //             jenis_kelamin: jenis_kelamin,
-    //             tanggal_lahir: tanggal_lahir,
-    //             kelas: kelas,
-    //             alamat: alamat
-    //         });
-    //         navigate('/auth/login');
-    //     } catch (error) {
-    //         if (error.response) {
-    //             console.log(error.response.data);
-    //             setMsg(error.response.data.msg);
-    //         }
-    //     }
-    // }
+
     return (
         <>
             {title ? (
                 <Typography fontWeight="700" variant="h3" mb={1}>
-                <Box mb={5}>
-                    {error && <ColorAlerts message={error} />}
-                </Box>
+                    <Box mb={5}>
+                        {error && <ColorAlerts message={error} />}
+                    </Box>
                     {title}
                 </Typography>
             ) : null}
@@ -118,27 +110,27 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
             <Box component="form" onSubmit={handleRegister}>
                 <Stack mb={3}>
                     <CustomFormLabel htmlFor="name">Nama Lengkap</CustomFormLabel>
-                    <CustomTextField id="name"
-                     variant="outlined" 
-                     placeholder="Nama Lengkap" 
-                     sx={{
-                        '& .MuiInputBase-input::placeholder': {
-                          color: 'gray',
-                        },
-                      }}
-                     fullWidth value={name} 
-                     onChange={(e) => setName(e.target.value)} required autoComplete="name"  />
+                    <CustomTextField
+                        id="name"
+                        variant="outlined"
+                        placeholder="Nama Lengkap"
+                        fullWidth
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        autoComplete="name"
+                    />
                     <CustomFormLabel htmlFor="email">Email</CustomFormLabel>
-                    <CustomTextField id="email" 
-                    variant="outlined" 
-                    placeholder ="@example"
-                    sx={{
-                        '& .MuiInputBase-input::placeholder': {
-                          color: 'gray',
-                        },
-                      }}
-                    fullWidth value={email} 
-                    onChange={(e) => setEmail(e.target.value)} required autoComplete="email" />
+                    <CustomTextField
+                        id="email"
+                        variant="outlined"
+                        placeholder="@example"
+                        fullWidth
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        autoComplete="email"
+                    />
                     <CustomFormLabel htmlFor="password">Password</CustomFormLabel>
                     <CustomTextField
                         id="password"
@@ -152,13 +144,15 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
                                 <InputAdornment position="end">
                                     <IconButton
                                         onClick={() => setShowPassword(!showPassword)}
-                                        onMouseDown={(e) => e.preventDefault()} >
+                                        onMouseDown={(e) => e.preventDefault()}
+                                    >
                                         {showPassword ? <Visibility /> : <VisibilityOff />}
                                     </IconButton>
                                 </InputAdornment>
                             )
                         }}
-                    required/>
+                        required
+                    />
                     <CustomFormLabel htmlFor="confPassword">Konfirmasi Password</CustomFormLabel>
                     <CustomTextField
                         id="confPassword"
@@ -179,29 +173,25 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
                                 </InputAdornment>
                             )
                         }}
-                    required/>
-                    <CustomFormLabel htmlFor="jenis_kelamin">Jenis Kelamin</CustomFormLabel>
-                    <FormControl fullWidth>
-                        <InputLabel id="jenis_kelamin">Jenis Kelamin</InputLabel>
-                        
-                        <Select
-                            labelId="jenis_kelamin"
-                            id="jenis_kelamin"
-                            value={jenis_kelamin}
-                            onChange={(e) => setJenisKelamin(e.target.value)}
-                            sx={{
-                                '& .MuiSelect-select': {
-                                  color: 'gray',
-                                },
-                              }}
-                            >
-                            {genderOptions.map((option) => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
+                        required
+                    />
+                    <Grid>
+                        <CustomFormLabel htmlFor="jenis_kelamin_id">Jenis Kelamin</CustomFormLabel>
+                        <CustomSelect
+                            id="jenis_kelamin_id"
+                            value={jenis_kelamin_id}
+                            onChange={(e) => setJenisKelaminId(e.target.value)}
+                            fullWidth
+                            variant="outlined"
+                        >
+                            {genderOptions.map((genderOption) => (
+                                <MenuItem key={genderOption.id} value={genderOption.id}>
+                                    {genderOption.jenis_kelamin}
                                 </MenuItem>
                             ))}
-                        </Select>
-                    </FormControl>
+                        </CustomSelect>
+                    </Grid>
+
                     <CustomFormLabel htmlFor="tanggal_lahir">Tanggal Lahir</CustomFormLabel>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DatePicker
@@ -209,50 +199,41 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
                                 <CustomTextField
                                     {...props}
                                     fullWidth
-                                    size="small"
-                                    sx={{
-                                        '& .MuiSvgIcon-root': {
-                                            width: 18,
-                                            height: 18,
-                                        },
-                                        '& .MuiFormHelperText-root': {
-                                            display: 'none',
-                                        },
-                                        '& .MuiInputBase-input::placeholder': {
-                                            color: 'gray',
-                                          },
-                                    }}
+                                    size="medium"
                                 />
                             )}
-                            placeholder="DatePicker"
-                            value={tanggal_lahir} 
-                            onChange={(newValue) => {
-                                setTanggalLahir(newValue); 
-                            }}
-                        required/>
+                            placeholder="Tanggal Lahir"
+                            value={tanggal_lahir}
+                            onChange={(newValue) => setTanggalLahir(newValue)}
+                            required
+                        />
                     </LocalizationProvider>
-                    <CustomFormLabel htmlFor="kelas">Kelas</CustomFormLabel>
-                    <CustomTextField id="kelas" 
-                    variant="outlined" 
-                    placeholder ="Kelas"
-                    sx={{
-                        '& .MuiInputBase-input::placeholder': {
-                          color: 'gray',
-                        },
-                      }}
-                    fullWidth value={kelas} 
-                    onChange={(e) => setKelas(e.target.value)} required />
+                    <CustomFormLabel htmlFor="kelas_id">Kelas</CustomFormLabel>
+                    <CustomSelect
+                       id="kelas_id"
+                       name="kelas_id"
+                       value={kelas_id}
+                       onChange={(e) => setKelasId(e.target.value)}
+                       fullWidth
+                       variant="outlined"
+                       required
+                    >
+                        {kelasOptions.map((kelasOption) => (
+                            <MenuItem key={kelasOption.id} value={kelasOption.id}>
+                                {kelasOption.nama_kelas}
+                            </MenuItem>
+                            ))}
+                    </CustomSelect>
                     <CustomFormLabel htmlFor="alamat">Alamat</CustomFormLabel>
-                    <CustomTextField id="alamat" 
-                    variant="outlined" 
-                    placeholder ="Alamat" 
-                    sx={{
-                        '& .MuiInputBase-input::placeholder': {
-                          color: 'gray',
-                        },
-                      }}
-                    fullWidth value={alamat} 
-                    onChange={(e) => setAlamat(e.target.value)} required />
+                    <CustomTextField
+                        id="alamat"
+                        variant="outlined"
+                        placeholder="Alamat"
+                        fullWidth
+                        value={alamat}
+                        onChange={(e) => setAlamat(e.target.value)}
+                        required
+                    />
                 </Stack>
                 <Button
                     color="primary"
@@ -262,25 +243,26 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
                     sx={{
                         backgroundColor: "#F48C06",
                         '&:hover': {
-                          backgroundColor: "#fa9e28",
+                            backgroundColor: "#f7a944",
                         }
-                      }}
+                    }}
                     type="submit"
                 >
                     Sign Up
                 </Button>
             </Box>
-        
+
             {subtitle}
         </>
     );
 };
+
 const ColorAlerts = ({ message }) => {
     return (
-      <Alert severity="error">
-        {message}
-      </Alert>
+        <Alert severity="error">
+            {message}
+        </Alert>
     );
-  };
-  
+};
+
 export default AuthRegister;
