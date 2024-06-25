@@ -8,13 +8,10 @@ import { IconMenu2 } from '@tabler/icons';
 // components
 import Notifications from './Notifications';
 import Profile from './Profile';
-// import Search from './Search';
-// import Navigation from './Navigation';
-// import MobileRightSidebar from './MobileRightSidebar';
 
 const Header = () => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
-  // const lgDown = useMediaQuery((theme) => theme.breakpoints.down('lg'));
+
 
   // drawer
   const customizer = useSelector((state) => state.customizer);
@@ -47,32 +44,9 @@ const Header = () => {
         >
           <IconMenu2 size="20" />
         </IconButton>
-        {/* ------------------------------------------- */}
-        {/* Search Dropdown */}
-        {/* ------------------------------------------- */}
-        {/* <Search />
-        {lgUp ? (
-          <>
-            <Navigation />
-          </>
-        ) : null} */}
-
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
-
-          {/* <Language /> */}
-          {/* ------------------------------------------- */}
-          {/* Ecommerce Dropdown */}
-          {/* ------------------------------------------- */}
-          {/* <Cart /> */}
-          {/* ------------------------------------------- */}
-          {/* End Ecommerce Dropdown */}
-          {/* ------------------------------------------- */}
           <Notifications />
-           {/* ------------------------------------------- */}
-          {/* Toggle Right Sidebar for mobile */}
-          {/* ------------------------------------------- */}
-          {/* {lgDown ? <MobileRightSidebar /> : null} */}
           <Profile />
         </Stack>
       </ToolbarStyled>
