@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import PageContainer from 'src/components/container/PageContainer';
 import Breadcrumb from 'src/layouts/full/shared/breadcrumb/Breadcrumb';
 import { Grid, Tabs, Tab, Box, CardContent, Divider } from '@mui/material';
@@ -7,8 +7,6 @@ import { Grid, Tabs, Tab, Box, CardContent, Divider } from '@mui/material';
 import AccountTab from '../../../components/pages/account-setting/AccountTab';
 import { IconArticle, IconBell, IconLock, IconUserCircle } from '@tabler/icons';
 import BlankCard from '../../../components/shared/BlankCard';
-import NotificationTab from '../../../components/pages/account-setting/NotificationTab';
-import BillsTab from '../../../components/pages/account-setting/BillsTab';
 import SecurityTab from '../../../components/pages/account-setting/SecurityTab';
 
 const BCrumb = [
@@ -101,12 +99,6 @@ const AccountSetting = () => {
                 <AccountTab />
               </TabPanel>
               <TabPanel value={value} index={1}>
-                <NotificationTab />
-              </TabPanel>
-              <TabPanel value={value} index={2}>
-                <BillsTab />
-              </TabPanel>
-              <TabPanel value={value} index={3}>
                 <SecurityTab />
               </TabPanel>
             </CardContent>
