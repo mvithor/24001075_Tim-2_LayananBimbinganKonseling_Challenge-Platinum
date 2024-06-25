@@ -9,10 +9,10 @@ import { Profile } from './SidebarProfile/Profile';
 const Sidebar = () => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
   const customizer = useSelector((state) => state.customizer);
-  const user = useSelector((state) => state.user || {}); // Tambahkan nilai default {}
+  const user = useSelector((state) => state.user || {}); 
   const dispatch = useDispatch();
   const theme = useTheme();
-  const role = user.role || 'guest'; // Pastikan role ada, jika tidak set default ke 'guest'
+  const role = user.role || 'guest'; 
 
   const toggleWidth =
     customizer.isCollapse && !customizer.isSidebarHover
@@ -107,7 +107,7 @@ const Sidebar = () => {
         <Logo />
       </Box>
       {/* Sidebar For Mobile */}
-      <SidebarItems role={role} /> {/* Pass role to SidebarItems */}
+      <SidebarItems role={role} />
     </Drawer>
   );
 };

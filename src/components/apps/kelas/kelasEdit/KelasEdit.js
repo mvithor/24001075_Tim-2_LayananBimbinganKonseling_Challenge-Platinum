@@ -1,78 +1,65 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Button, MenuItem } from '@mui/material';
-import { IconSchool } from '@tabler/icons';
-import axiosInstance from "src/utils/axiosInstance";
+import { Grid, Box, Button, TextField } from '@mui/material';
 
-const kelasEditForm = ({kelasId, onSave, onCancel }) => {
-    const [kelasData, setKelasData] = useState({
-        nama_kelas: ''
+
+const KelasEditForm = ({ kelas, handleChange, handleSubmit, handleCancel }) => {
+  const [kelasData, setKelasData] = useState(kelas);
+
+  useEffect(() => {
+    setKelasData(kelas);
+  }, [kelas]);
+
+  const onChange = (event) => {
+    setKelasData({
+      ...kelasData,
+      [event.target.name]: event.target.value
     });
+    handleChange(event);
+  };
 
-    useEffect(() => {
-        const fetchKelasData = async () => {
-            try {
-                const response = await axiosInstance.get(`/kelas/${kelasId}`);
-                setKelasData(response.data)
-            } catch (error) {
-                console.error('Error fetching kelas data:', error);
-            }
-        };
-        if (kelasId) {
-            fetchKelasData();
-        }
-    }, [kelasId]);
-
-    const handleChange = (event) => {
-        setKelasData({
-          ...kelasData,
-          [event.target.name]: event.target.value
-        });
-      };
-    
-      const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-          await axiosInstance.put(`/kelas/${kelasId}`, kelasData);
-          onSave();
-        } catch (error) {
-          console.error('Error updating kelas data:', error);
-        }
-      };
-      return (
-        <Box component="form" onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Nama Kelas"
-                name="nama_kelas"
-                value={kelasData.nama_kelas}
-                onChange={handleChange}
-                variant="outlined"
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <Box display="flex" justifyContent="flex-end">
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  startIcon={<IconSchool />}
-                >
-                  Edit
-                </Button>
-                <Button
-                  variant="outlined"
-                  color="secondary"
-                  onClick={onCancel}
-                  style={{ marginLeft: '8px' }}
-                >
-                  Cancel
-                </Button>
-              </Box>
-            </Grid>
+  return (
+    <Box component="form" onSubmit={(event) => handleSubmit(event, kelasData)}>
+      <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <TextField
+            fullWidth
+            label="Nama Kelas"
+            name="nama_kelas"
+            value={kelasData.nama_kelas || ''}
+            onChange={onChange}
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={12}>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-start', pt: 3 }}>
+              <Button
+                sx={{
+                  mr: 2,
+                  backgroundColor: "#F48C06",
+                  '&:hover': { backgroundColor: "#f7a944" }
+                }}
+                variant="contained"
+                type="submit"
+              >
+                Edit
+              </Button>
+              <Button
+                sx={{
+                  backgroundColor: "#2F327D",
+                  '&:hover': { backgroundColor: "#63659e" }
+                }}
+                variant="contained"
+                color="secondary"
+                type="button"
+                onClick={handleCancel}
+              >
+                Batal
+              </Button>
+            </Box>
           </Grid>
-        </Box>
-      );
+      </Grid>
+    </Box>
+  );
 };
-export default kelasEditForm;
+
+export default KelasEditForm;

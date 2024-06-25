@@ -11,7 +11,7 @@ import CustomTextField from '../../../components/forms/theme-elements/CustomText
 import CustomFormLabel from '../../../components/forms/theme-elements/CustomFormLabel';
 import { Stack } from '@mui/system';
 import AuthSocialButtons from './AuthSocialButtons';
-import CustomSelect from 'src/components/forms/theme-elements/CustomSelect'; // Pastikan import CustomSelect yang sesuai
+import CustomSelect from 'src/components/forms/theme-elements/CustomSelect'; 
 
 const AuthRegister = ({ title, subtitle, subtext }) => {
     const [name, setName] = useState('');

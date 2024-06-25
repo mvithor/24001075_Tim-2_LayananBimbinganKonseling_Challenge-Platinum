@@ -28,6 +28,7 @@ const KonselorEdit = Loadable(lazy(() => import ('../views/apps/konselor/Konselo
 const PelanggaranList = Loadable(lazy(() => import ('../views/apps/pelanggaran/PelanggaranList')));
 const KelasList = Loadable(lazy(() => import ('../views/apps/kelas/KelasList')));
 const KelasAdd = Loadable(lazy(() => import ('../views/apps/kelas/KelasAdd')));
+const KelasEdit = Loadable(lazy(() => import ('../views/apps/kelas/KelasEdit')));
 
 
 
@@ -86,7 +87,8 @@ const Router = [
       { path: '/dashboard/admin/konselor/edit/:id', element: <KonselorEdit/>},
       { path: '/dashboard/admin/pelanggaran', element: <PelanggaranList/>},
       { path: '/dashboard/admin/kelas', element: <KelasList/>, role: 'admin'}, 
-      { path: '/dashboard/admin/kelas/tambah-kelas', element: <KelasAdd/>}, 
+      { path: '/dashboard/admin/kelas/tambah-kelas', element: <KelasAdd/>},
+      { path: '/dashboard/admin/kelas/edit/:id', element: <KelasEdit/>},  
       { path: '/dashboard/admin/chats', element: <Chats /> },
       { path: '/dashboard/admin/notes', element: <Notes /> },
       { path: '/dashboard/admin/calendar', element: <Calendar /> },
