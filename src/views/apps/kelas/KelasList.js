@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import axiosInstance from "src/utils/axiosInstance";
 import { useNavigate } from "react-router";
 import {
@@ -76,7 +75,7 @@ const KelasList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/kelas/${id}`);
+      await axiosInstance.delete(`/kelas/${id}`);
       SetKelas(kelas.filter(kelas => kelas.id !== id));
       setConfirmDialogOpen(false); 
     } catch (error) {

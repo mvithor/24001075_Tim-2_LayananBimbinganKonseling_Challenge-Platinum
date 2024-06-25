@@ -3,8 +3,6 @@ import { Box, Grid } from '@mui/material';
 import TopCards from 'src/components/dashboardSiswa/TopCardsSiswa';
 import PoinCards from 'src/components/dashboardSiswa/PoinCards';
 import WelcomeCard from 'src/components/dashboards/WelcomeCard';
-import MonthlyEarnings from '../../components/dashboards/MonthlyEarnings';
-
 
 const Siswa = () => {
   return (

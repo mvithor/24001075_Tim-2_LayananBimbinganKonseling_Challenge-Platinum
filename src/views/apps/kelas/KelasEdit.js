@@ -1,83 +1,90 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Alert } from '@mui/material';
-import axios from 'axios';
+import axiosInstance from 'src/utils/axiosInstance';
 import PageContainer from 'src/components/container/PageContainer';
 import ParentCard from 'src/components/shared/ParentCard';
 import BreadcrumbKelasEdit from 'src/components/apps/kelas/kelasEdit/BreadcrumbEditKelas';
-import KelasTable from 'src/components/apps/kelas/kelasList/KelasTable';
-import kelasEditForm from 'src/components/apps/kelas/kelasEdit/KelasEdit';
+import KelasEditForm from 'src/components/apps/kelas/kelasEdit/KelasEdit';
 
 const KelasEdit = () => {
-    const [kelasList, setKelasList] = useState([]);
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(5);
-    const [selectedKelasId, setSelectedKelasId] = useState(null);
-    const [isEditing, setIsEditing] = useState(false);
-  
-    const fetchKelasList = async () => {
-      try {
-        const response = await axios.get('http://localhost/api/kelas');
-        setKelasList(response.data);
-      } catch (error) {
-        console.error('Error fetching kelas list:', error);
+  const { id } = useParams();
+  const [kelas, setKelas] = useState({
+    nama_kelas: ''
+  });
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
+    
+  const fetchKelasById = async (id) => {
+    try {
+      const response = await axiosInstance.get(`/kelas/${id}`);
+      setKelas(response.data);
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.msg) {
+        console.log(error.response.data);
+        setError(error.response.data.msg);
+      } else {
+        console.error('Terjadi kesalahan pada server:', error.message);
+        setError('Terjadi kesalahan pada server');
       }
-    };
-  
-    useEffect(() => {
-      fetchKelasList();
-    }, []);
-  
-    const handleEdit = (kelasId) => {
-      setSelectedKelasId(kelasId);
-      setIsEditing(true);
-    };
-  
-    const handleSave = () => {
-      fetchKelasList();
-      setIsEditing(false);
-    };
-  
-    const handleCancel = () => {
-      setIsEditing(false);
-    };
-  
-    const handleChangePage = (event, newPage) => {
-      setPage(newPage);
-    };
-  
-    const handleChangeRowsPerPage = (event) => {
-      setRowsPerPage(parseInt(event.target.value, 10));
-      setPage(0);
-    };
-  
-    return (
-      <Container>
-        <Typography variant="h4" gutterBottom>
-          Daftar Kelas
-        </Typography>
-        {isEditing ? (
-          <KelasEditForm
-            kelasId={selectedKelasId}
-            onSave={handleSave}
-            onCancel={handleCancel}
-          />
-        ) : (
-          <Box mt={2}>
-            <KelasTable
-              kelas={kelasList}
-              page={page}
-              rowsPerPage={rowsPerPage}
-              handleChangePage={handleChangePage}
-              handleChangeRowsPerPage={handleChangeRowsPerPage}
-              handleEdit={handleEdit}
-              handleDetail={(kelasId) => console.log(`Detail Kelas ID: ${kelasId}`)}
-              handleDelete={(kelasId) => console.log(`Delete Kelas ID: ${kelasId}`)}
-            />
-          </Box>
-        )}
-      </Container>
-    );
+    }
   };
-  
-  export default KelasEdit;
+
+  useEffect(() => {
+    fetchKelasById(id);
+  }, [id]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setKelas((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e, updatedKelas) => {
+    e.preventDefault();
+    try {
+      await axiosInstance.put(`/kelas/${id}`, updatedKelas);
+      setSuccess('Data Kelas Berhasil di Perbarui');
+      setTimeout(() => {
+        navigate('/dashboard/admin/kelas');
+      }, 3000);
+    } catch (error) {
+      if (error.response && error.response.data && error.response.data.msg) {
+        console.log(error.response.data);
+        setError(error.response.data.msg);
+      } else {
+        console.error('Terjadi kesalahan:', error.message);
+        setError('Terjadi kesalahan saat memuat data');
+      }
+    }
+  };
+
+  const handleCancel = () => {
+    navigate(-1);
+  };
+
+  return (
+    <PageContainer>
+      <BreadcrumbKelasEdit/>
+      <Box justifyContent={'center'} mb={3}>
+        {error && <Alert severity="error">{error}</Alert>}
+        {success && <Alert severity="success">{success}</Alert>}
+      </Box>
+      <ParentCard title="Form Edit Kelas">
+        <KelasEditForm
+          kelas={kelas}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          handleCancel={handleCancel}
+          error={error}
+          success={success}
+        />
+      </ParentCard>
+    </PageContainer>
+  );
+};
+
+export default KelasEdit;

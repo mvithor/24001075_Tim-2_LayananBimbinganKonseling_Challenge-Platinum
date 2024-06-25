@@ -26,8 +26,9 @@ const TambahKelasForm = ({ setSuccess, setError }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      const normalizedNamaKelas = namaKelas.toLowerCase(); 
       await axiosInstance.post("/kelas/tambah-kelas", {
-        nama_kelas: namaKelas
+        nama_kelas: normalizedNamaKelas 
       });
       setSuccess("Kelas berhasil ditambahkan!");
       setError(""); 

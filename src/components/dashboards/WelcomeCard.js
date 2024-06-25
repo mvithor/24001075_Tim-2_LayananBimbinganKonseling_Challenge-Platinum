@@ -4,7 +4,7 @@ import { Box, Typography, Card, CardContent, Grid } from '@mui/material';
 import welcomeImg from 'src/assets/images/backgrounds/welcome-bg2.png';
 
 const WelcomeCard = () => {
-  const user = useSelector((state) => state.user); // Mengakses state pengguna dari Redux store
+  const user = useSelector((state) => state.user); 
 
   return (
     <Card elevation={0} sx={{ backgroundColor: (theme) => theme.palette.primary.light, py: 0 }}>
