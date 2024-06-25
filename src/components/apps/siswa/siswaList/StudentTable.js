@@ -54,7 +54,7 @@ const StudentTable = ({
                 <Typography variant="h6" sx={{ fontSize: '1rem' }}>Jenis Kelamin</Typography>
               </TableCell>
               <TableCell>
-                <Typography variant="h6" sx={{ fontSize: '1rem' }}>Kelas</Typography> {/* Ubah kolom kelas */}
+                <Typography variant="h6" sx={{ fontSize: '1rem' }}>Kelas</Typography> 
               </TableCell>
               <TableCell>
                 <Typography variant="h6" sx={{ fontSize: '1rem' }}>Alamat</Typography>
@@ -83,7 +83,7 @@ const StudentTable = ({
                   <Typography sx={{ fontSize: '1rem' }}>{parsingGender(student.jenis_kelamin_id)}</Typography>
                 </TableCell>
                 <TableCell>
-                  <Typography sx={{ fontSize: '1rem' }}>{student.kelas_nama}</Typography> {/* Menampilkan nama kelas */}
+                  <Typography sx={{ fontSize: '1rem' }}>{student.kelas_nama}</Typography> 
                 </TableCell>
                 <TableCell>
                   <Typography sx={{ fontSize: '1rem' }}>{student.alamat}</Typography>
