@@ -20,9 +20,9 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
     const [showPassword, setShowPassword] = useState(false);
     const [confPassword, setConfPassword] = useState('');
     const [showConfPassword, setShowConfPassword] = useState(false);
-    const [jenis_kelamin_id, setJenisKelaminId] = useState(''); // Ubah nama state menjadi jenis_kelamin_id
+    const [jenis_kelamin_id, setJenisKelaminId] = useState(''); 
     const [tanggal_lahir, setTanggalLahir] = useState(null);
-    const [kelas_id, setKelasId] = useState(''); // Ubah nama state menjadi kelas_id
+    const [kelas_id, setKelasId] = useState(''); 
     const [alamat, setAlamat] = useState('');
     const [genderOptions, setGenderOptions] = useState([]);
     const [kelasOptions, setKelasOptions] = useState([]);
@@ -42,12 +42,12 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
 
         const fetchKelasOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/kelas');
-                setKelasOptions(response.data);
+              const response = await axios.get('http://localhost:4000/kelas');
+              setKelasOptions(response.data);
             } catch (error) {
-                console.error("Error fetching kelas:", error);
+              console.error("Error fetching kelas options:", error);
             }
-        }
+          };
 
         fetchGenderOptions();
         fetchKelasOptions();
@@ -63,9 +63,9 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
                 email,
                 password,
                 confPassword,
-                jenis_kelamin_id, // Ubah menjadi jenis_kelamin_id
+                jenis_kelamin_id, 
                 tanggal_lahir,
-                kelas_id, // Ubah menjadi kelas_id
+                kelas_id, 
                 alamat
             });
             setSuccess('Registrasi berhasil! Silakan login.');

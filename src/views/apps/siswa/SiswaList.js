@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import axiosInstance from 'src/utils/axiosInstance';
 import { Box, TextField, Alert, Typography, Button, Dialog, DialogActions, DialogContent } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import PageContainer from 'src/components/container/PageContainer';
@@ -21,7 +21,7 @@ const StudentsList = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/students');
+        const response = await axiosInstance.get('/students');
         setStudents(response.data);
       } catch (error) {
         console.error('Terjadi kesalahan:', error.message);
@@ -31,10 +31,11 @@ const StudentsList = () => {
 
     const fetchClasses = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/kelas/nama-kelas');
-        setClasses(response.data);
+        const response = await axiosInstance.get('/kelas/nama-kelas');
+        setClasses(response.data); // Fill classes state with the fetched data
       } catch (error) {
         console.error('Error fetching classes:', error);
+        setError('Terjadi kesalahan saat memuat data kelas');
       }
     };
 
@@ -52,7 +53,7 @@ const StudentsList = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:4000/students/${id}`);
+      await axiosInstance.delete(`/students/${id}`);
       setStudents(students.filter(student => student.id !== id));
       setConfirmDialogOpen(false); 
     } catch (error) {
@@ -127,8 +128,8 @@ const StudentsList = () => {
         />
       </ParentCard>
 
-       {/* Dialog Konfirmasi Hapus */}
-       <Dialog
+      {/* Dialog Konfirmasi Hapus */}
+      <Dialog
         open={confirmDialogOpen}
         onClose={handleCloseConfirmDialog}
         maxWidth="sm"

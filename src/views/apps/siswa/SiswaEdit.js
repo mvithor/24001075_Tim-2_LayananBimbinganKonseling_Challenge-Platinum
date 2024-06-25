@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Alert } from '@mui/material';
-import axios from 'axios';
+import axiosInstance from 'src/utils/axiosInstance';
 import PageContainer from 'src/components/container/PageContainer';
 import ParentCard from 'src/components/shared/ParentCard';
 import BreadcrumbSiswaEdit from 'src/components/apps/siswa/siswaEdit/BreadcrumbSiswaEdit';
@@ -23,7 +23,7 @@ const StudentEdit = () => {
 
   const fetchStudentById = async (id) => {
     try {
-      const response = await axios.get(`http://localhost:4000/students/${id}`);
+      const response = await axiosInstance.get(`/students/${id}`);
       setStudent(response.data);
     } catch (error) {
       if (error.response && error.response.data && error.response.data.msg) {
@@ -58,7 +58,7 @@ const StudentEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:4000/students/${id}`, student);
+      await axiosInstance.put(`/students/${id}`, student);
       setSuccess('Data Siswa Berhasil di Perbarui');
       setTimeout(() => {
         navigate('/dashboard/admin/siswa');

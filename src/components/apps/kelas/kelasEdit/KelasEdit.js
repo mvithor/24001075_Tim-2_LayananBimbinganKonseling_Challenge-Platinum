@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Box, Button, MenuItem } from '@mui/material';
 import { IconSchool } from '@tabler/icons';
-import axios from "axios";
+import axiosInstance from "src/utils/axiosInstance";
 
 const kelasEditForm = ({kelasId, onSave, onCancel }) => {
     const [kelasData, setKelasData] = useState({
@@ -11,7 +11,7 @@ const kelasEditForm = ({kelasId, onSave, onCancel }) => {
     useEffect(() => {
         const fetchKelasData = async () => {
             try {
-                const response = await axios.get(`http://localhost:4000/kelas/${kelasId}`);
+                const response = await axiosInstance.get(`/kelas/${kelasId}`);
                 setKelasData(response.data)
             } catch (error) {
                 console.error('Error fetching kelas data:', error);
@@ -32,7 +32,7 @@ const kelasEditForm = ({kelasId, onSave, onCancel }) => {
       const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          await axios.put(`http://localhost:4000/kelas/${kelasId}`, kelasData);
+          await axiosInstance.put(`/kelas/${kelasId}`, kelasData);
           onSave();
         } catch (error) {
           console.error('Error updating kelas data:', error);

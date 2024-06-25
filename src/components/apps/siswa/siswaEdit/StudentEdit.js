@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Box, Button, MenuItem } from '@mui/material';
+import { Grid, Box, Button, MenuItem, Alert } from '@mui/material';
 import CustomFormLabel from 'src/components/forms/theme-elements/CustomFormLabel';
 import { IconUser, IconSchool, IconBrandTelegram } from '@tabler/icons';
 import DateInput from './DateInput';
 import FormInput from './FormInput';
 import GenderSelect from './GenderSelect';
-import axios from 'axios';
+import axiosInstance from 'src/utils/axiosInstance';
 import CustomSelect from 'src/components/forms/theme-elements/CustomSelect';
 
 const StudentEditForm = ({ student, handleChange, handleDateChange, handleSubmit, handleCancel }) => {
   const [kelasOptions, setKelasOptions] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    // Fetch kelas options from backend
     const fetchKelasOptions = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/kelas'); // Sesuaikan dengan endpoint backend Anda
+        const response = await axiosInstance.get('/kelas');
         setKelasOptions(response.data);
       } catch (error) {
         console.error("Error fetching kelas options:", error);
@@ -29,7 +29,6 @@ const StudentEditForm = ({ student, handleChange, handleDateChange, handleSubmit
     return null;
   }
 
-  // Pastikan student.kelas_id selalu memiliki nilai
   const initialStudent = {
     name: '',
     jenis_kelamin_id: '',
@@ -38,13 +37,30 @@ const StudentEditForm = ({ student, handleChange, handleDateChange, handleSubmit
     alamat: ''
   };
 
-  // Gunakan nilai student untuk inisialisasi form
   const currentStudent = { ...initialStudent, ...student };
+  const validKelasId = kelasOptions.some(kelas => kelas.id === currentStudent.kelas_id) ? currentStudent.kelas_id : '';
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    if (!currentStudent.name || !currentStudent.jenis_kelamin_id || !currentStudent.tanggal_lahir || !validKelasId || !currentStudent.alamat) {
+      setErrorMessage("Semua form harus diisi.");
+      return;
+    }
+
+    setErrorMessage('');
+    handleSubmit(e);
+  };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleFormSubmit}>
       <Box sx={{ p: 3, bgcolor: 'background.paper', boxShadow: 2 }}>
         <Grid container spacing={3}>
+          {errorMessage && (
+            <Grid item xs={12}>
+              <Alert severity="error">{errorMessage}</Alert>
+            </Grid>
+          )}
           <FormInput
             label="Nama Siswa"
             id="name"
@@ -52,30 +68,37 @@ const StudentEditForm = ({ student, handleChange, handleDateChange, handleSubmit
             value={currentStudent.name || ''}
             onChange={handleChange}
             icon={<IconUser size="20" />}
+            required
           />
           <GenderSelect
             id="jenis_kelamin_id"
             name="jenis_kelamin_id"
             value={currentStudent.jenis_kelamin_id || ''}
             onChange={handleChange}
+            required
           />
           <DateInput
             id="tanggal_lahir"
             name="tanggal_lahir"
             value={currentStudent.tanggal_lahir || ''}
             onChange={handleDateChange}
+            required
           />
           <Grid item xs={12}>
             <CustomFormLabel htmlFor="kelas_id">Pilih Kelas</CustomFormLabel>
             <CustomSelect
               id="kelas_id"
               name="kelas_id"
-              value={currentStudent.kelas_id || ''}
+              value={validKelasId}
               onChange={handleChange}
               fullWidth
               variant="outlined"
               startAdornment={<IconSchool size="20" />}
+              required
             >
+              <MenuItem value="">
+                <em>Pilih Kelas</em>
+              </MenuItem>
               {kelasOptions.map((kelas) => (
                 <MenuItem key={kelas.id} value={kelas.id}>
                   {kelas.nama_kelas}
@@ -90,6 +113,7 @@ const StudentEditForm = ({ student, handleChange, handleDateChange, handleSubmit
             value={currentStudent.alamat || ''}
             onChange={handleChange}
             icon={<IconBrandTelegram size="20" />}
+            required
           />
           <Grid item xs={12}>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', pt: 3 }}>
