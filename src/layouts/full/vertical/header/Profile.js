@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Box, Menu, Avatar, Typography, Divider, Button, IconButton } from '@mui/material';
 import * as dropdownData from './data';
@@ -7,11 +8,15 @@ import { IconMail } from '@tabler/icons';
 import { Stack } from '@mui/system';
 
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
-import unlimitedImg from 'src/assets/images/backgrounds/unlimited-bg.png';
 import Scrollbar from 'src/components/custom-scroll/Scrollbar';
 
 const Profile = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    navigate('/auth/login')
+  }
   const handleClick2 = (event) => {
     setAnchorEl2(event.currentTarget);
   };
@@ -138,25 +143,10 @@ const Profile = () => {
               </Box>
             ))}
             <Box mt={2}>
-              <Box bgcolor="primary.light" p={3} mb={3} overflow="hidden" position="relative">
-                <Box display="flex" justifyContent="space-between">
-                  <Box>
-                    <Typography variant="h5" mb={2}>
-                      Unlimited <br />
-                      Access
-                    </Typography>
-                    <Button variant="contained" color="primary">
-                      Upgrade
-                    </Button>
-                  </Box>
-                  <img src={unlimitedImg} alt="unlimited" className="signup-bg"></img>
-                </Box>
-              </Box>
               <Button
-                to="/auth/login"
+                onClick={handleLogout}
                 variant="outlined"
                 color="primary"
-                component={Link}
                 fullWidth
               >
                 Logout
