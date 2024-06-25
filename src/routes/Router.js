@@ -54,6 +54,7 @@ const TentangKami = Loadable(lazy(() => import('../views/pages/landingpage/Tenta
 const Layanan = Loadable(lazy(() => import('../views/pages/landingpage/LayananKami')));
 // const Konselor = Loadable(lazy(() => import('')));
 const Literasi = Loadable(lazy(() => import('../views/pages/landingpage/Literasi')));
+const LiterasiDetail = Loadable(lazy(() => import ('../views/pages/landingpage/LiterasiDetail')));
 
 const Router = [
   {
@@ -64,6 +65,7 @@ const Router = [
       { path: '/layanan', element: <Layanan /> },
       { path: '/tentang-kami', element: <TentangKami /> },
       { path: '/literasi', element: <Literasi /> },
+      { path: '/literasi/:id', element: <LiterasiDetail /> },
       { path: '/auth/404', element: <Error /> },
       { path: '/auth/login', element: <Login /> },
       { path: '/auth/register', element: <Register /> },
