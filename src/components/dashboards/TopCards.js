@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axiosInstance from 'src/utils/axiosInstance';
 import { Box, CardContent, Grid, Typography } from '@mui/material';
 
 import icon1 from '../../assets/images/svgs/icon-connect.svg';
@@ -13,17 +13,20 @@ import icon6 from '../../assets/images/svgs/icon-speech-bubble.svg';
 const TopCards = () => {
   const [studentCount, setStudentCount] = useState(0);
   const [konselorCount, setKonselorCount] = useState(0);
+  const [kelasCount, setKelasCount] = useState(0);
 
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const [studentResponse, konselorResponse] = await Promise.all([
-          axios.get('http://localhost:4000/students/count'),
-          axios.get('http://localhost:4000/konselor/count')
+        const [studentResponse, konselorResponse, kelasResponse] = await Promise.all([
+          axiosInstance.get('/dashboard/admin/count-students'),
+          axiosInstance.get('/dashboard/admin/count-konselor'),
+          axiosInstance.get('/dashboard/admin/count-kelas')
         ]);
 
         setStudentCount(studentResponse.data.count);
         setKonselorCount(konselorResponse.data.count);
+        setKelasCount(kelasResponse.data.count)
       } catch (error) {
         console.error('Error fetching counts', error);
       }
@@ -52,7 +55,7 @@ const TopCards = () => {
       href: '/dashboard/admin/kelas',
       icon: icon4,
       title: 'Kelas',
-      digits: '30',
+      digits: kelasCount,
       bgcolor: 'secondary',
     },
     {
