@@ -32,7 +32,7 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
     useEffect(() => {
         const fetchGenderOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/users/jenis-kelamin');
+                const response = await axios.get('https://konselingbe-production.up.railway.app/users/jenis-kelamin');
                 setGenderOptions(response.data);
             } catch (error) {
                 console.error("Error fetching gender options:", error);
@@ -41,7 +41,7 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
 
         const fetchKelasOptions = async () => {
             try {
-              const response = await axios.get('http://localhost:4000/kelas/auth/kelas');
+              const response = await axios.get('https://konselingbe-production.up.railway.app/kelas/auth/kelas');
               setKelasOptions(response.data);
             } catch (error) {
               console.error("Error fetching kelas options:", error);
@@ -56,7 +56,7 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
         e.preventDefault();
         setError('');
         try {
-            await axios.post('http://localhost:4000/auth/register', {
+            await axios.post('https://konselingbe-production.up.railway.app/auth/register', {
                 name,
                 email,
                 password,
