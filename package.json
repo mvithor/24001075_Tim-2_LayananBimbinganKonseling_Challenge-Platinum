@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@casl/ability": "^6.3.3",
+    "babel-preset-react-app": "^10",
     "@casl/react": "^3.1.0",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
@@ -19,6 +20,7 @@
     "apexcharts": "^3.23.1",
     "axios": "^0.27.2",
     "axios-mock-adapter": "^1.21.1",
+    "caniuse-lite": "^1.0.30001637",
     "chance": "^1.1.9",
     "chokidar": "^3.6.0",
     "date-fns": "^2.29.2",
@@ -56,6 +58,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.0",
     "eslint": "^7.30.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
