@@ -29,6 +29,7 @@ const PelanggaranList = Loadable(lazy(() => import ('../views/apps/pelanggaran/P
 const KelasList = Loadable(lazy(() => import ('../views/apps/kelas/KelasList')));
 const KelasAdd = Loadable(lazy(() => import ('../views/apps/kelas/KelasAdd')));
 const KelasEdit = Loadable(lazy(() => import ('../views/apps/kelas/KelasEdit')));
+const KonselorAdd = Loadable(lazy(() => import ('../views/apps/konselor/KonselorAdd')))
 
 
 
@@ -52,7 +53,7 @@ const Maintenance = Loadable(lazy(() => import('../views/authentication/Maintena
 const LandingPage = Loadable(lazy(() => import('../views/pages/landingpage/Landingpage')));
 const TentangKami = Loadable(lazy(() => import('../views/pages/landingpage/TentangKami')));
 const Layanan = Loadable(lazy(() => import('../views/pages/landingpage/LayananKami')));
-// const Konselor = Loadable(lazy(() => import('')));
+const Konselor = Loadable(lazy(() => import('../views/pages/landingpage/Konselor')));
 const Literasi = Loadable(lazy(() => import('../views/pages/landingpage/Literasi')));
 const LiterasiDetail = Loadable(lazy(() => import ('../views/pages/landingpage/LiterasiDetail')));
 
@@ -66,6 +67,7 @@ const Router = [
       { path: '/tentang-kami', element: <TentangKami /> },
       { path: '/literasi', element: <Literasi /> },
       { path: '/literasi/:id', element: <LiterasiDetail /> },
+      { path: '/konselor', element: <Konselor /> },
       { path: '/auth/404', element: <Error /> },
       { path: '/auth/login', element: <Login /> },
       { path: '/auth/register', element: <Register /> },
@@ -90,6 +92,7 @@ const Router = [
       { path: '/dashboard/admin/pelanggaran', element: <PelanggaranList/>},
       { path: '/dashboard/admin/kelas', element: <KelasList/>, role: 'admin'}, 
       { path: '/dashboard/admin/kelas/tambah-kelas', element: <KelasAdd/>},
+      { path: '/dashboard/admin/konselor/tambah-konselor', element: <KonselorAdd/>},
       { path: '/dashboard/admin/kelas/edit/:id', element: <KelasEdit/>},  
       { path: '/dashboard/admin/chats', element: <Chats /> },
       { path: '/dashboard/admin/notes', element: <Notes /> },

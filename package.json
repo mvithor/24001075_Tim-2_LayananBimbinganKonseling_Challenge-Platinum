@@ -19,6 +19,7 @@
     "apexcharts": "^3.23.1",
     "axios": "^0.27.2",
     "axios-mock-adapter": "^1.21.1",
+    "bootstrap": "^5.3.3",
     "chance": "^1.1.9",
     "chokidar": "^3.6.0",
     "date-fns": "^2.29.2",
@@ -43,6 +44,10 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "react-spring": "^9.2.4",
+    "react-swipeable-views": "^0.14.0",
+    "react-swipeable-views-utils": "^0.14.0",
+    "react-toastify": "^10.0.5",
+    "reactstrap": "^9.2.2",
     "redux-persist": "^6.0.0",
     "regenerator-transform": "^0.15.2",
     "simplebar-react": "^2.4.1",
@@ -64,12 +69,15 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.3.1"
+    "jest": "^29.7.0",
+    "prettier": "^2.3.1",
+    "supertest": "^7.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test" ,
+    "testing": "jest --setupFiles dotenv/config",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
