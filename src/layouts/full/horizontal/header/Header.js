@@ -5,7 +5,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { toggleMobileSidebar } from 'src/store/customizer/CustomizerSlice';
 import { IconMenu2 } from '@tabler/icons';
 import Notifications from 'src/layouts/full/vertical/header/Notifications';
+<<<<<<< HEAD
 import Profile from 'src/layouts/full/vertical/header/ProfileAdmin';
+=======
+import Profile from 'src/layouts/full/vertical/header/Profile';
+>>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
 import Search from 'src/layouts/full/vertical/header/Search';
 import Navigation from 'src/layouts/full/vertical/header/Navigation';
 import Logo from 'src/layouts/full/shared/logo/Logo';

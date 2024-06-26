@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { Link } from 'react-router-dom';
 // import axios from 'axios';
@@ -28,20 +29,60 @@ const TopCards = () => {
 
   //   fetchCounts();
   // }, []);
+=======
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { Box, CardContent, Grid, Typography } from '@mui/material';
+
+import icon1 from '../../assets/images/svgs/icon-user-male.svg';
+import icon2 from '../../assets/images/svgs/icon-briefcase.svg';
+import icon3 from '../../assets/images/svgs/icon-dd-message-box.svg'
+
+const TopCards = () => {
+  const [studentCount, setStudentCount] = useState(0);
+  const [konselorCount, setKonselorCount] = useState(0);
+
+  useEffect(() => {
+    const fetchCounts = async () => {
+      try {
+        const [studentResponse, konselorResponse] = await Promise.all([
+          axios.get('http://localhost:4000/students/count'),
+          axios.get('http://localhost:4000/konselor/count')
+        ]);
+
+        setStudentCount(studentResponse.data.count);
+        setKonselorCount(konselorResponse.data.count);
+      } catch (error) {
+        console.error('Terjadi kesalahan saat mengambil data', error);
+      }
+    };
+
+    fetchCounts();
+  }, []);
+>>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
 
   const topcards = [
     {
       href: '/dashboard/siswa/prestasi',
       icon: icon1,
       title: 'Prestasi',
+<<<<<<< HEAD
       digits: '20',
+=======
+      digits: studentCount,
+>>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
       bgcolor: 'primary',
     },
     {
       href: '/dashboard/siswa/pelanggaran',
       icon: icon2,
       title: 'Pelanggaran',
+<<<<<<< HEAD
       digits: '30',
+=======
+      digits: konselorCount,
+>>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
       bgcolor: 'warning',
     },
   ];
