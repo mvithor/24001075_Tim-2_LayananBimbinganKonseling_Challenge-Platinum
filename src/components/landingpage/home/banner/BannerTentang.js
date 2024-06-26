@@ -20,10 +20,6 @@ const BannerTentang = () => {
     zIndex: -1,
   }));
 
-
-
-
-
   return (
     <Box mb={4} sx={{ overflow: 'hidden', alignContent:'center', alignItems:'center' }}>
       <Container maxWidth="lg">
@@ -43,10 +39,7 @@ const BannerTentang = () => {
                   overflow: 'hidden',
                 }}
               >
-                
-
-                  
-                  {/* <BackgroundBox/> */}
+                  <BackgroundBox/> 
                   <img src={bannerbg} alt="banner" style={{
                     position: 'absolute',
                     top: 0,
@@ -54,9 +47,7 @@ const BannerTentang = () => {
                     width: '100%',
                     height: '100%'
                   }} />
-                 
                 <BannerContent />
-
               </Box>
               // </Grid>
             ) : <BannerContent />}

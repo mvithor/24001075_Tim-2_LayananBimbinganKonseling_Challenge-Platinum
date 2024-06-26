@@ -27,13 +27,12 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
     const [genderOptions, setGenderOptions] = useState([]);
     const [kelasOptions, setKelasOptions] = useState([]);
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchGenderOptions = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/users/jenis-kelamin');
+                const response = await axios.get('https://konselingbe-production.up.railway.app/users/jenis-kelamin');
                 setGenderOptions(response.data);
             } catch (error) {
                 console.error("Error fetching gender options:", error);
@@ -42,7 +41,7 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
 
         const fetchKelasOptions = async () => {
             try {
-              const response = await axios.get('http://localhost:4000/kelas/auth/kelas');
+              const response = await axios.get('https://konselingbe-production.up.railway.app/kelas/auth/kelas');
               setKelasOptions(response.data);
             } catch (error) {
               console.error("Error fetching kelas options:", error);
@@ -56,9 +55,8 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
-        setSuccess('');
         try {
-            await axios.post('http://localhost:4000/auth/register', {
+            await axios.post('https://konselingbe-production.up.railway.app/auth/register', {
                 name,
                 email,
                 password,
@@ -68,10 +66,10 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
                 kelas_id, 
                 alamat
             });
-            setSuccess('Registrasi berhasil! Silakan login.');
+            alert('Registrasi berhasil! Silakan login.');
             setTimeout(() => {
                 navigate('/auth/login');
-            }, 2000); // Redirect after 2 seconds
+            }, 2000); // Redirect setelah 2 detik
         } catch (error) {
             if (error.response) {
                 console.log(error.response.data);

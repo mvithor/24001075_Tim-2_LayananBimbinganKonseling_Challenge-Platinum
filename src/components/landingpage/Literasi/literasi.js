@@ -1,26 +1,25 @@
 import { useEffect, useState } from "react";
-import { Bounce, ToastContainer } from "react-toastify";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 import { Grid, Box, Container, Card as MuiCard, CardActionArea, CardContent, CardMedia, Typography, Button as MuiButton } from '@mui/material';
 import axios from 'axios';
 import 'react-toastify/dist/ReactToastify.css';
 
 const Literasi = () => {
-  const [error, setError] = useState('');
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     const fetchStudents = async () => {
       try {
         const response = await axios.get('http://localhost:4000/literasi');
-        console.log(response.data); // Tambahkan log ini untuk melihat data
+        console.log(response.data); 
         setArticles(response.data);
       } catch (error) {
         if (error.response && error.response.data && error.response.data.msg) {
           console.log(error.response.data);
-          setError(error.response.data.msg);
+          toast.error(error.response.data.msg);
         } else {
           console.error('Terjadi kesalahan:', error.message);
-          setError('Terjadi kesalahan saat memuat data');
+          toast.error('Terjadi kesalahan saat memuat data');
         }
       }
     };

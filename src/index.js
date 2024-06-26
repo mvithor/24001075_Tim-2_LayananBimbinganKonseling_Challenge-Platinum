@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store/Store';
+import { StudentProvider } from './context/StudentContext';
 import Spinner from './views/spinner/Spinner';
 // import './_mockApis';
 import './utils/i18n';
@@ -15,7 +16,11 @@ root.render(
      <PersistGate loading={null} persistor={persistor}>
     <Suspense fallback={<Spinner />}>
       <BrowserRouter>
-        <App />
+      <StudentProvider>
+      <App />
+
+      </StudentProvider>
+
       </BrowserRouter>
     </Suspense>
     </PersistGate>

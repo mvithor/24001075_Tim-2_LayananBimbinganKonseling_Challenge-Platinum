@@ -21,33 +21,28 @@ const Notes = () => {
   const lgDown = useMediaQuery((theme) => theme.breakpoints.down('lg'));
 
   useEffect(() => {
-    if (lgDown) {
-      setMobileSidebarOpen(!isMobileSidebarOpen);
-    } else {
-      setMobileSidebarOpen(true);
-    }
+    setMobileSidebarOpen(prevState => {
+      // Invert the state based on lgDown
+      if (lgDown) {
+        return !prevState;
+      } else {
+        return true;
+      }
+    });
   }, [lgDown]);
 
   return (
     <PageContainer title="Notes ui" description="this is Note page">
       <Breadcrumb title="Note app" items={BCrumb} />
       <AppCard>
-        {/* ------------------------------------------- */}
         {/* Left part */}
-        {/* ------------------------------------------- */}
-
-        {isMobileSidebarOpen ? (
+        {isMobileSidebarOpen && (
           <NoteSidebar
             isMobileSidebarOpen={isMobileSidebarOpen}
             onSidebarClose={() => setMobileSidebarOpen(false)}
           />
-        ) : (
-          ''
         )}
-        {/* ------------------------------------------- */}
         {/* Right part */}
-        {/* ------------------------------------------- */}
-
         <Box flexGrow={1}>
           <NoteContent toggleNoteSidebar={() => setMobileSidebarOpen(!isMobileSidebarOpen)} />
         </Box>

@@ -1,51 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { Box, CardContent, Grid, Typography } from '@mui/material';
-
+import { Box, Grid, Typography } from '@mui/material';
 import icon1 from '../../assets/images/svgs/icon-user-male.svg';
 import icon2 from '../../assets/images/svgs/icon-briefcase.svg';
-import icon3 from '../../assets/images/svgs/icon-dd-message-box.svg'
+
+// Dummy value for konselorCount
+const pelanggaranCount = 30;
+const prestasiCount = 10;
+
+const topcards = [
+  {
+    href: '/dashboard/siswa/prestasi',
+    icon: icon1,
+    title: prestasiCount,
+    digits: '20',
+    bgcolor: 'primary',
+  },
+  {
+    href: '/dashboard/siswa/pelanggaran',
+    icon: icon2,
+    title: 'Pelanggaran',
+    digits: pelanggaranCount,
+    bgcolor: 'warning',
+  },
+];
 
 const TopCards = () => {
-  const [studentCount, setStudentCount] = useState(0);
-  const [konselorCount, setKonselorCount] = useState(0);
-
-  useEffect(() => {
-    const fetchCounts = async () => {
-      try {
-        const [studentResponse, konselorResponse] = await Promise.all([
-          axios.get('http://localhost:4000/students/count'),
-          axios.get('http://localhost:4000/konselor/count')
-        ]);
-
-        setStudentCount(studentResponse.data.count);
-        setKonselorCount(konselorResponse.data.count);
-      } catch (error) {
-        console.error('Terjadi kesalahan saat mengambil data', error);
-      }
-    };
-
-    fetchCounts();
-  }, []);
-
-  const topcards = [
-    {
-      href: '/dashboard/siswa/prestasi',
-      icon: icon1,
-      title: 'Prestasi',
-      digits: studentCount,
-      bgcolor: 'primary',
-    },
-    {
-      href: '/dashboard/siswa/pelanggaran',
-      icon: icon2,
-      title: 'Pelanggaran',
-      digits: konselorCount,
-      bgcolor: 'warning',
-    },
-  ];
-
   return (
     <Grid container spacing={3}>
       {topcards.map((topcard, i) => (
@@ -55,7 +35,6 @@ const TopCards = () => {
               sx={{
                 bgcolor: `${topcard.bgcolor}.light`,
                 textAlign: 'center',
-               
                 boxShadow: 1,
                 p: 2,
                 height: '100%',
@@ -64,7 +43,7 @@ const TopCards = () => {
                 justifyContent: 'center',
               }}
             >
-              <img src={topcard.icon} alt={topcard.title} width="50" justifyContent="center" />
+              <img src={topcard.icon} alt={topcard.title} width="50" style={{ justifyContent: 'center' }} />
               <Typography variant="subtitle1" mt={1} fontWeight={600}>
                 {topcard.title}
               </Typography>

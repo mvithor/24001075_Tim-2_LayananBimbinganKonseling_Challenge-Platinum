@@ -1,10 +1,7 @@
 import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
 
-
 import Loadable from '../layouts/full/shared/loadable/Loadable';
-// import { element } from 'prop-types';
-// import { element } from 'prop-types';
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -26,6 +23,8 @@ const StudentEdit = Loadable(lazy(() => import('../views/apps/siswa/SiswaEdit'))
 const KonselorList = Loadable(lazy(() => import ('../views/apps/konselor/Konselor')));
 const KonselorEdit = Loadable(lazy(() => import ('../views/apps/konselor/KonselorEdit')));
 const PelanggaranList = Loadable(lazy(() => import ('../views/apps/pelanggaran/PelanggaranList')));
+const PelanggaranAdd = Loadable(lazy(() => import ('../views/apps/pelanggaran/PelanggaranAdd')));
+const PelanggaranEdit = Loadable(lazy(() => import ('../views/apps/pelanggaran/PelanggaranEdit')));
 const KelasList = Loadable(lazy(() => import ('../views/apps/kelas/KelasList')));
 const KelasAdd = Loadable(lazy(() => import ('../views/apps/kelas/KelasAdd')));
 const KelasEdit = Loadable(lazy(() => import ('../views/apps/kelas/KelasEdit')));
@@ -38,6 +37,8 @@ const KonselorAdd = Loadable(lazy(() => import ('../views/apps/konselor/Konselor
 
 // Pages
 const AccountSetting = Loadable(lazy(() => import('../views/pages/account-setting/AccountSetting')),);
+const AccountSettingSiswa = Loadable(lazy(() => import('../views/pages/account-setting/AccountSettingSiswa')),);
+
 
 // authentication
 const Login = Loadable(lazy(() => import('../views/authentication/auth1/Login')));
@@ -56,6 +57,7 @@ const Layanan = Loadable(lazy(() => import('../views/pages/landingpage/LayananKa
 const Konselor = Loadable(lazy(() => import('../views/pages/landingpage/Konselor')));
 const Literasi = Loadable(lazy(() => import('../views/pages/landingpage/Literasi')));
 const LiterasiDetail = Loadable(lazy(() => import ('../views/pages/landingpage/LiterasiDetail')));
+
 
 const Router = [
   {
@@ -90,6 +92,8 @@ const Router = [
       { path: '/dashboard/admin/konselor', element: <KonselorList/>},
       { path: '/dashboard/admin/konselor/edit/:id', element: <KonselorEdit/>},
       { path: '/dashboard/admin/pelanggaran', element: <PelanggaranList/>},
+      { path: '/dashboard/admin/pelanggaran/add-pelanggaran', element: <PelanggaranAdd/>},
+      { path: '/dashboard/admin/pelanggaran/edit/:id', element: <PelanggaranEdit/>},      
       { path: '/dashboard/admin/kelas', element: <KelasList/>, role: 'admin'}, 
       { path: '/dashboard/admin/kelas/tambah-kelas', element: <KelasAdd/>},
       { path: '/dashboard/admin/konselor/tambah-konselor', element: <KonselorAdd/>},
@@ -100,7 +104,7 @@ const Router = [
       { path: '/dashboard/admin/tickets', element: <Tickets /> },
       { path: '/apps/gallery', element: <Gallery /> },
       { path: '/user-profile', element: <UserProfile /> },
-      { path: '/pages/account-settings', element: <AccountSetting /> },
+      { path: '/dashboard/admin/account-settings', element: <AccountSetting /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
     
@@ -109,7 +113,8 @@ const Router = [
     path: '/',
     element: <FullLayout />, 
     children: [
-      { path: '/dashboard/siswa', exact: true, element: <DashboardSiswa /> }, 
+      { path: '/dashboard/siswa', exact: true, element: <DashboardSiswa /> },
+      { path: '/dashboard/siswa/account-settings', element: <AccountSettingSiswa /> }, 
     ],
   },
 ];

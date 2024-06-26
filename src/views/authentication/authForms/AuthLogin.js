@@ -7,7 +7,7 @@ import CustomTextField from '../../../components/forms/theme-elements/CustomText
 import CustomFormLabel from '../../../components/forms/theme-elements/CustomFormLabel';
 import AuthSocialButtons from './AuthSocialButtons';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
-import axiosInstance from 'src/utils/axiosInstance';
+import axios from 'axios';
 import { setUser } from 'src/store/apps/user/userSlice';
 
 const AuthLogin = ({ title, subtitle, subtext }) => {
@@ -30,14 +30,14 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
     e.preventDefault();
     setError('');
     try {
-      const response = await axiosInstance.post('/auth/login', {
+      const response = await axios.post('/auth/login', {
         email,
         password
       });
-
-      const { name, role, accessToken } = response.data;
+      const { name, role, accessToken, userId } = response.data;
       localStorage.setItem('accessToken', accessToken);
-      dispatch(setUser({ name, role, accessToken }));
+      dispatch(setUser({ name, role, accessToken, userId }));
+
 
       if (role === 'admin') {
         navigate('/dashboard/admin');

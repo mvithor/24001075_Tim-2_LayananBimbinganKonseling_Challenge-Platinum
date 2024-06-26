@@ -5,7 +5,6 @@ import WelcomeCard from 'src/components/dashboards/WelcomeCard';
 import RevenueUpdates from '../../components/dashboards/RevenueUpdates';
 import EmployeeSalary from '../../components/dashboards/EmployeeSalary';
 import TopPerformers from '../../components/dashboards/TopPerformers';
-import Welcome from 'src/layouts/full/shared/welcome/Welcome';
 
 const Admin = () => {
   return (
@@ -46,7 +45,6 @@ const Admin = () => {
         <Grid item xs={12} lg={4}>
         </Grid>
       </Grid>
-      <Welcome />
     </Box>
   );
 };

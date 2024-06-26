@@ -2,6 +2,7 @@
   "name": "modernize",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://main--web-konseling.netlify.app",
   "dependencies": {
     "@casl/ability": "^6.3.3",
     "@casl/react": "^3.1.0",
@@ -19,13 +20,19 @@
     "apexcharts": "^3.23.1",
     "axios": "^0.27.2",
     "axios-mock-adapter": "^1.21.1",
+<<<<<<< HEAD
     "bootstrap": "^5.3.3",
+=======
+    "babel-preset-react-app": "^10",
+    "caniuse-lite": "^1.0.30001637",
+>>>>>>> 4d9a4b10b5308bd970aba63c2531babb13d30dc2
     "chance": "^1.1.9",
     "chokidar": "^3.6.0",
     "date-fns": "^2.29.2",
     "emoji-picker-react": "^3.6.1",
     "formik": "^2.2.9",
     "framer-motion": "^8.5.2",
+    "glob": "^10.4.2",
     "i18next": "^22.0.6",
     "jwt-decode": "^4.0.0",
     "lodash": "^4.17.21",
@@ -44,20 +51,25 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "react-spring": "^9.2.4",
+<<<<<<< HEAD
     "react-swipeable-views": "^0.14.0",
     "react-swipeable-views-utils": "^0.14.0",
     "react-toastify": "^10.0.5",
     "reactstrap": "^9.2.2",
+=======
+    "react-toastify": "^10.0.5",
+>>>>>>> 4d9a4b10b5308bd970aba63c2531babb13d30dc2
     "redux-persist": "^6.0.0",
     "regenerator-transform": "^0.15.2",
     "simplebar-react": "^2.4.1",
     "slick-carousel": "^1.8.1",
-    "stylis-plugin-rtl": "^2.0.2",
+    "stylis-plugin-rtl": "^2.1.1",
     "web-vitals": "^2.1.4",
     "webpack-manifest-plugin": "^5.0.0",
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.16.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.30.0",
     "eslint-config-airbnb": "^18.2.1",
