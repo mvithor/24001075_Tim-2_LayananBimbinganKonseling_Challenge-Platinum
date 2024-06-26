@@ -34,16 +34,10 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
         email,
         password
       });
-
-<<<<<<< HEAD
       const { name, role, accessToken, userId } = response.data;
       localStorage.setItem('accessToken', accessToken);
       dispatch(setUser({ name, role, accessToken, userId }));
-=======
-      const { name, role, accessToken } = response.data;
-      localStorage.setItem('accessToken', accessToken);
-      dispatch(setUser({ name, role, accessToken }));
->>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
+
 
       if (role === 'admin') {
         navigate('/dashboard/admin');
