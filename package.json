@@ -43,10 +43,7 @@
     "react-scripts": "5.0.1",
     "react-slick": "^0.29.0",
     "react-spring": "^9.2.4",
-<<<<<<< HEAD
     "react-toastify": "^10.0.5",
-=======
->>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
     "redux-persist": "^6.0.0",
     "regenerator-transform": "^0.15.2",
     "simplebar-react": "^2.4.1",
