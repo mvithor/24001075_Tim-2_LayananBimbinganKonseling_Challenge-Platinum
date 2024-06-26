@@ -1,19 +1,15 @@
 import React, { useState,useEffect} from 'react';
 import axiosInstance from "src/utils/axiosInstance";
-import { Grid, Box, Button, Alert, MenuItem, InputAdornment } from '@mui/material';
-// import CustomFormLabel from 'src/components/forms/theme-elements/CustomFormLabel';
+import { Grid, Box, Button, MenuItem, InputAdornment } from '@mui/material';
 import { IconUser,IconGenderAgender} from '@tabler/icons';
 import CustomFormLabel from "src/components/forms/theme-elements/CustomFormLabel";
 import CustomSelect from 'src/components/forms/theme-elements/CustomSelect';
 import CustomOutlinedInput from "src/components/forms/theme-elements/CustomOutlinedInput";
-// import DateInput from './DateInput';
-import FormInput from './FormInput';
-// import GenderSelect from './GenderSelect';
-// import axiosInstance from 'src/utils/axiosInstance';
-// import CustomSelect from 'src/components/forms/theme-elements/CustomSelect';
 
-const PelanggaranEditForm = ({ pelanggaran, handleChange, handleSubmit, handleCancel }) => {
-  // const [kelasOptions, setKelasOptions] = useState([]);
+import FormInput from './FormInput';
+
+
+  const PelanggaranEditForm = ({ pelanggaran, handleChange, handleSubmit, handleCancel }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [genderOptions, setGenderOptions] = useState([]);
   useEffect(() => {
@@ -30,19 +26,6 @@ const PelanggaranEditForm = ({ pelanggaran, handleChange, handleSubmit, handleCa
     fetchGenderOptions();
 
   }, []);
-
-  // useEffect(() => {
-  //   const fetchKelasOptions = async () => {
-  //     try {
-  //       const response = await axiosInstance.get('/kelas');
-  //       setKelasOptions(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching kelas options:", error);
-  //     }
-  //   };
-
-  //   fetchKelasOptions();
-  // }, []);
 
   if (!pelanggaran) {
     return null;

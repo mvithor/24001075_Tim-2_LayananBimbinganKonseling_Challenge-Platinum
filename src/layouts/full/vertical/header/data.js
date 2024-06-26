@@ -64,11 +64,8 @@ const notifications = [
 //
 // Profile dropdown
 //
-<<<<<<< HEAD
+
 const profileAdmin = [
-=======
-const profile = [
->>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
   {
     href: '/dashboard/admin/account-settings',
     title: 'My Profile',
@@ -77,7 +74,6 @@ const profile = [
   },
 ]
 
-<<<<<<< HEAD
 const profileSiswa = [
   {
     href: '/dashboard/siswa/account-settings',
@@ -87,8 +83,6 @@ const profileSiswa = [
   },
 ]
 
-=======
->>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
 // apps dropdown
 
 const appsLink = [
@@ -177,8 +171,5 @@ const pageLinks = [
   },
 ];
 
-<<<<<<< HEAD
 export { notifications, profileAdmin, profileSiswa, pageLinks, appsLink };
-=======
-export { notifications, profile, pageLinks, appsLink };
->>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
+
