@@ -27,7 +27,6 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
     const [genderOptions, setGenderOptions] = useState([]);
     const [kelasOptions, setKelasOptions] = useState([]);
     const [error, setError] = useState('');
-    const [success, setSuccess] = useState('');
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -56,7 +55,6 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
-        setSuccess('');
         try {
             await axios.post('http://localhost:4000/auth/register', {
                 name,
@@ -68,10 +66,10 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
                 kelas_id, 
                 alamat
             });
-            setSuccess('Registrasi berhasil! Silakan login.');
+            alert('Registrasi berhasil! Silakan login.');
             setTimeout(() => {
                 navigate('/auth/login');
-            }, 2000); // Redirect after 2 seconds
+            }, 2000); // Redirect setelah 2 detik
         } catch (error) {
             if (error.response) {
                 console.log(error.response.data);

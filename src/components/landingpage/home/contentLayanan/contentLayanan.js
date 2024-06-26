@@ -22,16 +22,6 @@ const StyledButton = styled(Button)(() => ({
     backgroundColor: '#d47805', 
   }
 }));
-const StyledButton1 = styled(Button)(() => ({
-  padding: '5px 10px',
-  fontWeight: '400',
-  marginLeft: '10px',
-  fontSize: '16px',
-  backgroundColor: '#2F327D',
-  '&:hover': {
-    backgroundColor: '#d47805', 
-  }
-}));
 //#2F327D
 // bg1
 const StyledBackground = styled(Box)(({ theme }) => ({

@@ -1,12 +1,9 @@
 import React from 'react';
-import { Grid, Typography, Box, Container, styled, useMediaQuery } from '@mui/material';
+import { Grid, Typography, Container, styled, useMediaQuery } from '@mui/material';
 import AnimateFadeIn from '../animation/Animation';
 //papper MUI
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
-
-
-import studentImage1 from '../../../../assets/images/landingpage/aboutUs.svg';
 
 //paper MUI
 const DemoPaper = styled(Paper)(({ theme }) => ({
@@ -31,53 +28,14 @@ const StyledContainer = styled(Container)(({ theme }) => ({
     paddingBottom: theme.spacing(8),
 }));
 
-
-
-
-
 const ContentTentang = () => {
     const lgUp = useMediaQuery((theme) => theme.breakpoints.up('md'));
-    const BackgroundBox = styled(Box)(({ theme }) => ({
-        position: 'absolute',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        backgroundImage: `url(${studentImage1})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        zIndex: -1,
-      }));
-    
     return (
         <StyledContainer maxWidth="lg">
 
             {/* content 1*/}
             <Grid container spacing={4} alignItems="center" textAlign={'justify'} >
                 <Grid item xs={12} md={12} lg={12}>
-                    {/* <Box 
-                    
-                    p={3.2}
-                sx={{
-                    border:'1px solid',
-                  backgroundColor: ('#ffffff'),
-                  position: 'relative',
-                  height: 'calc(100vh - 100px)',
-                //   maxHeight: '790px',
-                  overflow: 'hidden',
-                }}
-                    >
-                        
-                    <BackgroundBox />
-                    <AnimateFadeIn>
-                            <img src={studentImage1} alt="banner" style={{ 
-                     position: 'relative',
-                     top: 0, 
-                     left: 0, 
-                      width: '100%', 
-                     height: '100%',
-                      }} />
-                    </AnimateFadeIn> */}
                       <AnimateFadeIn>
                             <Typography
                                 variant={lgUp? "h1" : "h3"}
@@ -88,12 +46,10 @@ const ContentTentang = () => {
                                 Visi dan Misi
                             </Typography>
                         </AnimateFadeIn>
-                        
                         <AnimateFadeIn>
                       <Stack direction={{ xs: 'column', md: 'row' }} spacing={2} justifyContent="space-around"
                       sx={{mt:10}}
                       >
-                        
                             <DemoPaper1 variant="elevation" sx={{ minWidth: 275, bgcolor: 'primary.about1', textAlign: 'justify', zIndex: 2 }}>
                             <Typography
                                 variant="h3"

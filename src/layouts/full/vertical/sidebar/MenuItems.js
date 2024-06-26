@@ -1,7 +1,6 @@
 import {
   IconPoint,
   IconAperture,
-  IconHome,
   IconUser,
   IconTrophy,
   IconUsers,

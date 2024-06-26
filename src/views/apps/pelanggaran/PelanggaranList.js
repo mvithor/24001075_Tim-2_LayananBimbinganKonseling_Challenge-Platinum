@@ -17,7 +17,6 @@ import PageContainer from "src/components/container/PageContainer";
 import ParentCard from "src/components/shared/ParentCard";
 import PelanggaranTable from "src/components/apps/pelanggaran/pelanggaranList/PelanggaranTable";
 
-
 const PelanggaranList = () => {
   const [page, SetPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -33,7 +32,7 @@ const PelanggaranList = () => {
       try {
         const response = await axiosInstance.get("/admin/api/pelanggaran");
         SetPelanggaran(response.data.dataPelanggaran);
-        console.log('data:',pelanggaran);
+        console.log('data:', pelanggaran);
       } catch (error) {
         if (error.response && error.response.data && error.response.data.msg) {
           console.log(error.response.data);
@@ -45,7 +44,7 @@ const PelanggaranList = () => {
       }
     };
     fetchPelanggaran();
-  }, []);
+  }, [pelanggaran]); // Tambahkan pelanggaran ke dalam array dependencies
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -56,6 +55,7 @@ const PelanggaranList = () => {
       pelanggaran.nama_siswa.toLowerCase().includes(searchQuery.toLowerCase())
     )
     .sort((a, b) => a.nama_siswa.localeCompare(b.nama_siswa));
+
   const handleChangePage = (event, newPage) => {
     SetPage(newPage);
   };
@@ -84,14 +84,11 @@ const PelanggaranList = () => {
     }
   };
 
-  // const handleDetail = () => {
-  //   navigate("/dashboard/admin/kelas/KelasId");
-  // };
-
   const handleOpenConfirmDialog = (id) => {
     setDeletepelanggaranId(id);
     setConfirmDialogOpen(true);
   };
+
   const handleCloseConfirmDialog = () => {
     setConfirmDialogOpen(false);
   };
@@ -146,12 +143,12 @@ const PelanggaranList = () => {
           handleChangePage={handleChangePage}
           handleChangeRowsPerPage={handleChangeRowsPerPage}
           handleEdit={handleEdit}
-          // handleDetail={handleDetail}
           handleDelete={handleOpenConfirmDialog} 
         />
       </ParentCard>
-         {/* Dialog Konfirmasi Hapus */}
-       <Dialog
+
+      {/* Dialog Konfirmasi Hapus */}
+      <Dialog
         open={confirmDialogOpen}
         onClose={handleCloseConfirmDialog}
         maxWidth="sm"
@@ -164,10 +161,11 @@ const PelanggaranList = () => {
         </DialogContent>
         <DialogActions sx={{ justifyContent: 'center', mb: 2 }}>
           <Button 
-            sx={{mr:3}}
-          
+            sx={{mr:3}} 
             variant="outlined" 
-            color="secondary" onClick={handleCloseConfirmDialog}>
+            color="secondary" 
+            onClick={handleCloseConfirmDialog}
+          >
             Batal
           </Button>
           <Button 
@@ -176,13 +174,13 @@ const PelanggaranList = () => {
               backgroundColor: "#F48C06",
               '&:hover': { backgroundColor: "#f7a944" }
             }}
-           variant="contained" 
-           onClick={() => handleDelete(deletePelanggaranId)}>
+            variant="contained" 
+            onClick={() => handleDelete(deletePelanggaranId)}
+          >
             Hapus
           </Button>
         </DialogActions>
       </Dialog>
-
 
     </PageContainer>
   );

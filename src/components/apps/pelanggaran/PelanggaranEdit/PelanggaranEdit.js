@@ -1,17 +1,17 @@
-import React, { useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axiosInstance from "src/utils/axiosInstance";
 import { Grid, Box, Button, MenuItem, InputAdornment } from '@mui/material';
-import { IconUser,IconGenderAgender} from '@tabler/icons';
+import { IconUser, IconGenderAgender } from '@tabler/icons';
 import CustomFormLabel from "src/components/forms/theme-elements/CustomFormLabel";
-import CustomSelect from 'src/components/forms/theme-elements/CustomSelect';
+import CustomSelect from "src/components/forms/theme-elements/CustomSelect";
 import CustomOutlinedInput from "src/components/forms/theme-elements/CustomOutlinedInput";
 
 import FormInput from './FormInput';
 
-
-  const PelanggaranEditForm = ({ pelanggaran, handleChange, handleSubmit, handleCancel }) => {
+const PelanggaranEditForm = ({ pelanggaran, handleChange, handleSubmit, handleCancel }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [genderOptions, setGenderOptions] = useState([]);
+
   useEffect(() => {
     const fetchGenderOptions = async () => {
       try {
@@ -22,9 +22,7 @@ import FormInput from './FormInput';
       }
     };
 
-
     fetchGenderOptions();
-
   }, []);
 
   if (!pelanggaran) {
@@ -42,9 +40,7 @@ import FormInput from './FormInput';
   };
 
   const currentPelanggaran = { ...initialPelanggaran, ...pelanggaran };
- 
-  // const validKelasId = kelasOptions.some(kelas => kelas.id === currentPelanggaran.kelas_id) ? currentPelanggaran.kelas_id : '';
-  console.log('data:',pelanggaran )
+
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
@@ -66,25 +62,8 @@ import FormInput from './FormInput';
   };
 
   return (
-    // <form onSubmit={handleFormSubmit}>
-    //   <Box sx={{ p: 3, bgcolor: 'background.paper', boxShadow: 2 }}>
-    //     <Grid container spacing={3}>
-    //       {errorMessage && (
-    //         <Grid item xs={12}>
-    //           <Alert severity="error">{errorMessage}</Alert>
-    //         </Grid>
-    //       )}
-    //       <FormInput
-    //         label="Nama Siswa"
-    //         id="nama_siswa"
-    //         name="nama_siswa"
-    //         value={currentPelanggaran.nama_siswa || ''}
-    //         onChange={handleChange}
-    //         icon={<IconUser size="20" />}
-            
-    //       />
-          <Box>
-      <form onSubmit={handleSubmit}>
+    <Box>
+      <form onSubmit={handleFormSubmit}>
         <Grid item xs={12}>
           <Box display="flex" alignItems="center">
             <CustomFormLabel htmlFor="nama_siswa" sx={{ mt: 0, mb: 1 }}>
@@ -99,30 +78,19 @@ import FormInput from './FormInput';
             onChange={handleChange}
             fullWidth
           />
-          {/* <FormInput
-            label="Jenis Kelamin"
-            id="jenis_kelamin"
-            name="jenis_kelamin"
-            value={currentPelanggaran.jenis_kelamin || ''}
-            onChange={handleChange}
-            icon={<IconUser size="20" />}
-            required
-          /> */}
-          {/* gender dropdown */}
           <Box display="flex" alignItems="center">
-          <CustomFormLabel htmlFor="jenisKelamin" sx={{ mt: 2, mb: 1}} fullWidth >
+            <CustomFormLabel htmlFor="jenis_kelamin" sx={{ mt: 2, mb: 1 }}>
               Jenis Kelamin
             </CustomFormLabel>
-            </Box>
-            
+          </Box>
           <CustomSelect
-          startAdornment={<InputAdornment position="start"><IconGenderAgender /></InputAdornment>}
+            startAdornment={<InputAdornment position="start"><IconGenderAgender /></InputAdornment>}
             id="jenis_kelamin"
             name="jenis_kelamin"
             value={currentPelanggaran.jenis_kelamin || ''}
             onChange={handleChange}
             fullWidth
-            variant="outlined"      
+            variant="outlined"
           >
             {genderOptions.map((genderOption) => (
               <MenuItem key={genderOption.id} value={genderOption.jenis_kelamin}>
@@ -130,7 +98,6 @@ import FormInput from './FormInput';
               </MenuItem>
             ))}
           </CustomSelect>
-          
           <FormInput
             label="Waktu Kejadian"
             id="waktu"
@@ -176,51 +143,6 @@ import FormInput from './FormInput';
             icon={<IconUser size="20" />}
             required
           />
-          {/* <GenderSelect
-            id="jenis_kelamin_id"
-            name="jenis_kelamin_id"
-            value={currentPelanggaran.jenis_kelamin_id || ''}
-            onChange={handleChange}
-            required
-          />
-          <DateInput
-            id="tanggal_lahir"
-            name="tanggal_lahir"
-            value={currentPelanggaran.tanggal_lahir || ''}
-            onChange={handleDateChange}
-            required
-          />
-          <Grid item xs={12}>
-            <CustomFormLabel htmlFor="kelas_id">Pilih Kelas</CustomFormLabel>
-            <CustomSelect
-              id="kelas_id"
-              name="kelas_id"
-              value={validKelasId}
-              onChange={handleChange}
-              fullWidth
-              variant="outlined"
-              startAdornment={<IconSchool size="20" />}
-              required
-            >
-              <MenuItem value="">
-                <em>Pilih Kelas</em>
-              </MenuItem>
-              {kelasOptions.map((kelas) => (
-                <MenuItem key={kelas.id} value={kelas.id}>
-                  {kelas.nama_kelas}
-                </MenuItem>
-              ))}
-            </CustomSelect>
-          </Grid>
-          <FormInput
-            label="Alamat"
-            id="alamat"
-            name="alamat"
-            value={currentPelanggaran.alamat || ''}
-            onChange={handleChange}
-            icon={<IconBrandTelegram size="20" />}
-            required
-          /> */}
           <Grid item xs={12}>
             <Box sx={{ display: 'flex', justifyContent: 'flex-start', pt: 3 }}>
               <Button
@@ -248,7 +170,14 @@ import FormInput from './FormInput';
               </Button>
             </Box>
           </Grid>
-          </Grid>
+          {errorMessage && (
+            <Grid item xs={12}>
+              <Box sx={{ color: 'red', mt: 2 }}>
+                {errorMessage}
+              </Box>
+            </Grid>
+          )}
+        </Grid>
       </form>
     </Box>
   );
