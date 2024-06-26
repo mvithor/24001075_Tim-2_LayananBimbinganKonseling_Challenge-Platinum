@@ -42,7 +42,7 @@ const AuthRegister = ({ title, subtitle, subtext }) => {
 
         const fetchKelasOptions = async () => {
             try {
-              const response = await axios.get('http://localhost:4000/kelas');
+              const response = await axios.get('http://localhost:4000/kelas/auth/kelas');
               setKelasOptions(response.data);
             } catch (error) {
               console.error("Error fetching kelas options:", error);

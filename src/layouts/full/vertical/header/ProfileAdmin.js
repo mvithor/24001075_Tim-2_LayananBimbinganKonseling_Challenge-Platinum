@@ -10,7 +10,7 @@ import { Stack } from '@mui/system';
 import ProfileImg from 'src/assets/images/profile/user-1.jpg';
 import Scrollbar from 'src/components/custom-scroll/Scrollbar';
 
-const Profile = () => {
+const ProfileAdmin = () => {
   const [anchorEl2, setAnchorEl2] = useState(null);
   const navigate = useNavigate();
   const handleLogout = () => {
@@ -90,7 +90,7 @@ const Profile = () => {
               </Box>
             </Stack>
             <Divider />
-            {dropdownData.profile.map((profile) => (
+            {dropdownData.profileAdmin.map((profile) => (
               <Box key={profile.title}>
                 <Box sx={{ py: 2, px: 0 }} className="hover-text-primary">
                   <Link to={profile.href}>
@@ -159,4 +159,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ProfileAdmin;

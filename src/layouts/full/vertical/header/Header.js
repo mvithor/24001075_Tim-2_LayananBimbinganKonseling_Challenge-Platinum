@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+// src/layouts/full/vertical/header/Header.js
+=======
+>>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
 import React from 'react';
 import { IconButton, Box, AppBar, useMediaQuery, Toolbar, styled, Stack } from '@mui/material';
 import PropTypes from 'prop-types';
@@ -7,19 +11,30 @@ import { IconMenu2 } from '@tabler/icons';
 
 // components
 import Notifications from './Notifications';
+<<<<<<< HEAD
+import ProfileAdmin from './ProfileAdmin';
+import ProfileSiswa from './ProfileSiswa';
+=======
 import Profile from './Profile';
-// import Search from './Search';
-// import Navigation from './Navigation';
-// import MobileRightSidebar from './MobileRightSidebar';
+>>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
 
 const Header = () => {
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'));
-  // const lgDown = useMediaQuery((theme) => theme.breakpoints.down('lg'));
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
   // drawer
   const customizer = useSelector((state) => state.customizer);
   const dispatch = useDispatch();
 
+<<<<<<< HEAD
+  // role
+  const role = useSelector((state) => state.user.role);
+
+=======
+>>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
   const AppBarStyled = styled(AppBar)(({ theme }) => ({
     boxShadow: 'none',
     background: theme.palette.background.paper,
@@ -29,7 +44,11 @@ const Header = () => {
       minHeight: customizer.TopbarHeight,
     },
   }));
+<<<<<<< HEAD
+  const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
+=======
   const ToolbarStyled = styled(Toolbar)(({theme}) => ({
+>>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
     width: '100%',
     color: theme.palette.text.secondary,
   }));
@@ -47,33 +66,14 @@ const Header = () => {
         >
           <IconMenu2 size="20" />
         </IconButton>
-        {/* ------------------------------------------- */}
-        {/* Search Dropdown */}
-        {/* ------------------------------------------- */}
-        {/* <Search />
-        {lgUp ? (
-          <>
-            <Navigation />
-          </>
-        ) : null} */}
-
         <Box flexGrow={1} />
         <Stack spacing={1} direction="row" alignItems="center">
-
-          {/* <Language /> */}
-          {/* ------------------------------------------- */}
-          {/* Ecommerce Dropdown */}
-          {/* ------------------------------------------- */}
-          {/* <Cart /> */}
-          {/* ------------------------------------------- */}
-          {/* End Ecommerce Dropdown */}
-          {/* ------------------------------------------- */}
           <Notifications />
-           {/* ------------------------------------------- */}
-          {/* Toggle Right Sidebar for mobile */}
-          {/* ------------------------------------------- */}
-          {/* {lgDown ? <MobileRightSidebar /> : null} */}
+<<<<<<< HEAD
+          {role === 'admin' ? <ProfileAdmin /> : <ProfileSiswa />}
+=======
           <Profile />
+>>>>>>> 93592626ecf30555c2fa51824a6f3f1d181ee2c0
         </Stack>
       </ToolbarStyled>
     </AppBarStyled>
