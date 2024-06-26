@@ -64,9 +64,18 @@ const notifications = [
 //
 // Profile dropdown
 //
-const profile = [
+const profileAdmin = [
   {
     href: '/dashboard/admin/account-settings',
+    title: 'My Profile',
+    subtitle: 'Account Settings',
+    icon: icon1,
+  },
+]
+
+const profileSiswa = [
+  {
+    href: '/dashboard/siswa/account-settings',
     title: 'My Profile',
     subtitle: 'Account Settings',
     icon: icon1,
@@ -161,4 +170,4 @@ const pageLinks = [
   },
 ];
 
-export { notifications, profile, pageLinks, appsLink };
+export { notifications, profileAdmin, profileSiswa, pageLinks, appsLink };

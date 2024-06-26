@@ -1,10 +1,7 @@
 import React, { lazy } from 'react';
 import { Navigate } from 'react-router-dom';
-
-
 import Loadable from '../layouts/full/shared/loadable/Loadable';
-// import { element } from 'prop-types';
-// import { element } from 'prop-types';
+
 
 /* ***Layouts**** */
 const FullLayout = Loadable(lazy(() => import('../layouts/full/FullLayout')));
@@ -37,6 +34,7 @@ const KelasEdit = Loadable(lazy(() => import ('../views/apps/kelas/KelasEdit')))
 
 // Pages
 const AccountSetting = Loadable(lazy(() => import('../views/pages/account-setting/AccountSetting')),);
+const AccountSettingSiswa = Loadable(lazy(() => import('../views/pages/account-setting/AccountSettingSiswa')),);
 
 // authentication
 const Login = Loadable(lazy(() => import('../views/authentication/auth1/Login')));
@@ -53,8 +51,7 @@ const LandingPage = Loadable(lazy(() => import('../views/pages/landingpage/Landi
 const TentangKami = Loadable(lazy(() => import('../views/pages/landingpage/TentangKami')));
 const Layanan = Loadable(lazy(() => import('../views/pages/landingpage/LayananKami')));
 // const Konselor = Loadable(lazy(() => import('')));
-const Literasi = Loadable(lazy(() => import('../views/pages/landingpage/Literasi')));
-const LiterasiDetail = Loadable(lazy(() => import ('../views/pages/landingpage/LiterasiDetail')));
+
 
 const Router = [
   {
@@ -64,8 +61,7 @@ const Router = [
       { path: '/', element: <LandingPage /> },
       { path: '/layanan', element: <Layanan /> },
       { path: '/tentang-kami', element: <TentangKami /> },
-      { path: '/literasi', element: <Literasi /> },
-      { path: '/literasi/:id', element: <LiterasiDetail /> },
+     
       { path: '/auth/404', element: <Error /> },
       { path: '/auth/login', element: <Login /> },
       { path: '/auth/register', element: <Register /> },
@@ -97,7 +93,7 @@ const Router = [
       { path: '/dashboard/admin/tickets', element: <Tickets /> },
       { path: '/apps/gallery', element: <Gallery /> },
       { path: '/user-profile', element: <UserProfile /> },
-      { path: '/pages/account-settings', element: <AccountSetting /> },
+      { path: '/dashboard/admin/account-settings', element: <AccountSetting /> },
       { path: '*', element: <Navigate to="/auth/404" /> },
     ],
     
@@ -106,7 +102,8 @@ const Router = [
     path: '/',
     element: <FullLayout />, 
     children: [
-      { path: '/dashboard/siswa', exact: true, element: <DashboardSiswa /> }, 
+      { path: '/dashboard/siswa', exact: true, element: <DashboardSiswa /> },
+      { path: '/dashboard/siswa/account-settings', element: <AccountSettingSiswa /> }, 
     ],
   },
 ];

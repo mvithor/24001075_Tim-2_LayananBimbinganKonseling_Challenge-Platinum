@@ -16,11 +16,13 @@ import NotesReducer from './apps/notes/NotesSlice';
 import TicketReducer from './apps/tickets/TicketSlice';
 import UserProfileReducer from './apps/userProfile/UserProfileSlice';
 import sidebarReducer from './apps/sidebar/sidebarSlice';
-import userReducer from './apps/user/userSlice'; 
+import userReducer from './apps/user/userSlice';
+import studentReducer from './apps/students/studentSlice';
 
 // Gabungkan reducer
 const rootReducer = combineReducers({
   user: userReducer,
+  student: studentReducer,
   customizer: CustomizerReducer,
   chat: ChatsReducer,
   notes: NotesReducer,

@@ -35,9 +35,9 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
         password
       });
 
-      const { name, role, accessToken } = response.data;
+      const { name, role, accessToken, userId } = response.data;
       localStorage.setItem('accessToken', accessToken);
-      dispatch(setUser({ name, role, accessToken }));
+      dispatch(setUser({ name, role, accessToken, userId }));
 
       if (role === 'admin') {
         navigate('/dashboard/admin');

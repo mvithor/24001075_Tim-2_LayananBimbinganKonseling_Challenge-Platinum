@@ -3,7 +3,7 @@ import PageContainer from 'src/components/container/PageContainer';
 
 import Footer from '../../../components/landingpage/Footer';
 import LpHeader from 'src/components/landingpage/Header';
-import Literasi from 'src/components/landingpage/Literasi/literasi';
+import Literasi from 'src/components/landingpage/literasi/literasi';
 
 const LiterasiViews = () => {
     return (
