@@ -3,7 +3,7 @@ import Link from '../components/test/Link';
 
 it('changes the class when hovered', () => {
   const component = renderer.create(
-    <Link page="http://www.facebook.com">Percobaan</Link>,
+    <Link page="https://main--web-konseling.netlify.app">konseling</Link>,
   );
   let tree = component.toJSON();
   expect(tree).toMatchSnapshot();
