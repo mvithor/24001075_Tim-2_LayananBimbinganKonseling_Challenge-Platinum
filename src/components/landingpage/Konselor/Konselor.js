@@ -1,4 +1,3 @@
-import {useState, useEffect} from 'react';
 import { Container} from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
@@ -12,7 +11,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import AnimateFadeIn from '../../landingpage/home/animation/Animation';
 import Stack from '@mui/material/Stack';
-import axios from 'axios';
+
 
 function stringToColor(string) {
   let hash = 0;
@@ -48,28 +47,6 @@ export default function KataKonselor() {
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
   }));
-
-  // const [error, setError] = useState('');
-  // const [articles, setArticles] = useState([]);
-
-  // useEffect(() => {
-  //   const dataKonselor = async () => {
-  //     try {
-  //       const response = await axios.get('http://localhost:4000/literasi');
-  //       console.log(response.data); // Tambahkan log ini untuk melihat data
-  //       setArticles(response.data);
-  //     } catch (error) {
-  //       if (error.response && error.response.data && error.response.data.msg) {
-  //         console.log(error.response.data);
-  //         setError(error.response.data.msg);
-  //       } else {
-  //         console.error('Terjadi kesalahan:', error.message);
-  //         setError('Terjadi kesalahan saat memuat data');
-  //       }
-  //     }
-  //   };
-  //   dataKonselor();
-  // }, []);
 
   return (
     <StyledContainer>
