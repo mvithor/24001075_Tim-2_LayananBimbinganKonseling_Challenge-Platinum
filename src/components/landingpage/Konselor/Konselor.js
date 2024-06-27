@@ -39,7 +39,7 @@ function stringAvatar(name) {
   };
 }
 
-export default function Konselor() {
+export default function DetailKonselor() {
   const StyledContainer = styled(Container)(({ theme }) => ({
     paddingTop: theme.spacing(8),
     paddingBottom: theme.spacing(8),
