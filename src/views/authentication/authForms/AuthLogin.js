@@ -30,7 +30,7 @@ const AuthLogin = ({ title, subtitle, subtext }) => {
     e.preventDefault();
     setError('');
     try {
-      const response = await axios.post('/auth/login', {
+      const response = await axios.post('https://konselingbe-production.up.railway.app/auth/login', {
         email,
         password
       });
