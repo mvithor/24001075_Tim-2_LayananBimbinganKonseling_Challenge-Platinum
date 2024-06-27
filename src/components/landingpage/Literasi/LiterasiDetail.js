@@ -5,7 +5,7 @@ import { Container, Typography, Box, Button } from '@mui/material';
 import { Bounce, ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const ArticleDetail = () => {
+const LiterasiDetail = () => {
   const { id } = useParams();
   const [article, setArticle] = useState(null);
   const [error, setError] = useState('');
@@ -69,4 +69,4 @@ const ArticleDetail = () => {
   );
 }
 
-export default ArticleDetail;
+export default LiterasiDetail;

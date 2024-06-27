@@ -7,7 +7,7 @@ import LiterasiDetail from 'src/components/landingpage/literasi/LiterasiDetail';
 
 const LiterasiDetailViews = () => {
     return (
-      <PageContainer title="Tentang Kami" description="This is About Us">
+      <PageContainer title="Literasi Detail" description="Literasi Detail">
         <LpHeader />
         <LiterasiDetail/>
         <Footer />
